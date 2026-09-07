@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="back-button" (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Daftar Berita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="daftar-berita-content">
+  <div class="page-container">
+    <div class="search-container">
+      <ion-searchbar
+        class="search-bar"
+        mode="ios"
+        placeholder="Cari berita..."
+        [showClearButton]="'never'"
+      ></ion-searchbar>
+    </div>
+
+    <div class="page-title">
+      <div class="title-icon">
+        <ion-icon name="newspaper-outline"></ion-icon>
+      </div>
+
+      <div>
+        <h1>Berita Terkini</h1>
+        <p>Informasi terbaru seputar Trawas</p>
+      </div>
+    </div>
+
+    <div class="news-list">
+      <div
+        class="news-card"
+        *ngFor="let berita of beritaList"
+        [routerLink]="['/detail-berita', berita.id]"
+      >
+        <div class="news-image">
+          <img [src]="berita.gambar" [alt]="berita.judul" />
+        </div>
+
+        <div class="news-content">
+          <span class="news-date">{{ berita.tanggal }}</span>
+
+          <h2>{{ berita.judul }}</h2>
+
+          <p>{{ berita.excerpt }}</p>
+
+          <div class="read-more">
+            <span>Baca Selengkapnya</span>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

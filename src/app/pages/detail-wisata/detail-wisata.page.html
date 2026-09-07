@@ -1,0 +1,172 @@
+<ion-content class="detail-content" [fullscreen]="true">
+  <div class="page-container">
+    <header class="detail-header">
+      <button
+        type="button"
+        class="back-button"
+        aria-label="Kembali"
+        (click)="goBack()"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+
+      <span>Detail Wisata</span>
+
+      <div class="header-spacer"></div>
+    </header>
+
+    <section class="hero-section">
+      <div class="hero-image-wrapper">
+        <img
+          [src]="wisata.gambarUtama"
+          [alt]="wisata.nama"
+          class="hero-image"
+        />
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-category">{{ wisata.kategori }}</div>
+
+        <div class="hero-rating">
+          <ion-icon name="star"></ion-icon>
+          {{ wisata.rating }}
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-section">
+      <h1>{{ wisata.nama }}</h1>
+
+      <div class="location-row">
+        <ion-icon name="location-outline"></ion-icon>
+        <span>Trawas, Mojokerto</span>
+      </div>
+    </section>
+
+    <section class="quick-info">
+      <div class="quick-card">
+        <div class="quick-icon">
+          <ion-icon name="pricetag-outline"></ion-icon>
+        </div>
+
+        <div>
+          <span>Harga Tiket</span>
+          <strong>{{ wisata.harga }}</strong>
+        </div>
+      </div>
+
+      <div class="quick-card">
+        <div class="quick-icon">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+
+        <div>
+          <span>Jam Buka</span>
+          <strong>{{ wisata.jamBuka }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>Tentang Wisata</h2>
+      </div>
+
+      <p class="description">{{ wisata.deskripsi }}</p>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>Lokasi</h2>
+      </div>
+
+      <div class="location-card">
+        <div class="location-icon">
+          <ion-icon name="location-outline"></ion-icon>
+        </div>
+
+        <div class="location-content">
+          <strong>Alamat</strong>
+          <p>{{ wisata.alamat }}</p>
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        shape="round"
+        color="primary"
+        class="map-button"
+        (click)="bukaMaps()"
+      >
+        <ion-icon slot="start" name="map-outline"></ion-icon>
+
+        Lihat Lokasi
+      </ion-button>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>Fasilitas</h2>
+      </div>
+
+      <div class="facility-grid">
+        <div class="facility-item" *ngFor="let fasilitas of wisata.fasilitas">
+          <div class="facility-icon">
+            <ion-icon [name]="fasilitas.icon"></ion-icon>
+          </div>
+
+          <span>{{ fasilitas.label }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <h2>Galeri Foto</h2>
+
+        <button type="button" class="gallery-link" (click)="bukaGaleri()">
+          Lihat Semua
+        </button>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-main">
+          <img [src]="wisata.galeri[0]" alt="Galeri wisata" />
+        </div>
+
+        <div class="gallery-side">
+          <img [src]="wisata.galeri[1]" alt="Galeri wisata" />
+
+          <button type="button" class="gallery-more" (click)="bukaGaleri()">
+            <img [src]="wisata.galeri[2]" alt="Galeri wisata" />
+
+            <span> +{{ wisata.jumlahFotoLain }} Foto </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-promo">
+      <div class="promo-icon">
+        <ion-icon name="camera-outline"></ion-icon>
+      </div>
+
+      <div class="promo-text">
+        <strong>Ingin melihat Trawas lebih dekat?</strong>
+
+        <span> Jelajahi destinasi melalui Virtual Tour. </span>
+      </div>
+
+      <ion-button
+        shape="round"
+        color="primary"
+        [routerLink]="['/tabs/virtual-tour']"
+      >
+        Jelajahi
+      </ion-button>
+    </section>
+
+    <div class="bottom-space"></div>
+  </div>
+</ion-content>

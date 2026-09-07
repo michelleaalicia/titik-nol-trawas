@@ -1,0 +1,94 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+:root {
+  --tn-green: #0d631b;
+  --tn-green-dark: #095315;
+  --tn-green-light: #eef6ef;
+
+  --tn-background: #f7f9f6;
+  --tn-surface: #ffffff;
+
+  --tn-text: #20231f;
+  --tn-text-secondary: #626861;
+  --tn-text-light: #8a9089;
+
+  --tn-border: #dfe3df;
+
+  --tn-radius-sm: 8px;
+  --tn-radius-md: 12px;
+  --tn-radius-lg: 16px;
+
+  --tn-page-padding: 16px;
+  --tn-section-gap: 20px;
+
+  --ion-color-primary: #0d631b;
+  --ion-color-primary-rgb: 13, 99, 27;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background: var(--tn-background);
+  color: var(--tn-text);
+}
+
+ion-app {
+  width: 100%;
+  height: 100%;
+  background: var(--tn-background);
+}
+
+ion-content {
+  --background: var(--tn-background);
+}
+
+ion-toolbar {
+  --background: var(--tn-surface);
+  --color: var(--tn-text);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ion-tabs ion-content {
+  --padding-bottom: 88px;
+}
+
+ion-tabs ion-content::part(scroll) {
+  padding-bottom: 88px;
+  box-sizing: border-box;
+}

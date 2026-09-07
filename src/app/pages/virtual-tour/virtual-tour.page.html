@@ -1,0 +1,167 @@
+<ion-content class="virtual-tour-content" [fullscreen]="true">
+  <main class="page-container">
+    <header class="page-header">
+      <div class="brand">
+        <img
+          src="assets/icon/logo.png"
+          alt="Titik Nol Trawas"
+          class="brand-logo"
+        />
+
+        <span class="brand-name"> Titik Nol Trawas </span>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <span class="eyebrow"> VIRTUAL TOUR 360° </span>
+
+        <h1>Jelajahi Trawas</h1>
+
+        <p>
+          Nikmati pengalaman menjelajahi berbagai sudut destinasi Trawas secara
+          virtual.
+        </p>
+      </div>
+    </section>
+
+    <section class="viewer">
+      <div
+        class="panorama"
+        (mousedown)="mulaiDrag($event)"
+        (mousemove)="saatDrag($event)"
+        (mouseup)="selesaiDrag()"
+        (mouseleave)="selesaiDrag()"
+        (touchstart)="mulaiDrag($event)"
+        (touchmove)="saatDrag($event)"
+        (touchend)="selesaiDrag()"
+        [class.dragging]="isDragging"
+      >
+        <img
+          [src]="selectedScene.gambar"
+          [alt]="selectedScene.nama"
+          class="panorama-image"
+          [style.transform]="
+            'translateX(' + offset + 'px) scale(' + zoom + ')'
+          "
+        />
+
+        <div class="panorama-overlay"></div>
+
+        <div class="viewer-top">
+          <div class="scene-label">
+            <ion-icon name="location-outline"></ion-icon>
+
+            <span> {{ selectedScene.nama }} </span>
+          </div>
+
+          <button
+            type="button"
+            class="expand-button"
+            aria-label="Reset tampilan"
+            (click)="resetView()"
+          >
+            <ion-icon name="expand-outline"></ion-icon>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="hotspot"
+          *ngFor="let scene of scenes"
+          [style.left]="scene.posisi.left"
+          [style.top]="scene.posisi.top"
+          [class.active]="scene.id === selectedScene.id"
+          (click)="pilihScene(scene)"
+        >
+          <span class="hotspot-pulse"></span>
+
+          <span class="hotspot-icon">
+            <ion-icon [name]="scene.icon"></ion-icon>
+          </span>
+
+          <span class="hotspot-label"> {{ scene.nama }} </span>
+        </button>
+
+        <div class="zoom-controls">
+          <button type="button" aria-label="Perbesar" (click)="zoomIn()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+
+          <button type="button" aria-label="Perkecil" (click)="zoomOut()">
+            <ion-icon name="remove"></ion-icon>
+          </button>
+        </div>
+
+        <div class="drag-hint">Geser untuk menjelajahi</div>
+      </div>
+    </section>
+
+    <section class="scene-info">
+      <div class="scene-info-icon">
+        <ion-icon [name]="selectedScene.icon"></ion-icon>
+      </div>
+
+      <div class="scene-info-content">
+        <span>Lokasi Virtual Tour</span>
+
+        <h2>{{ selectedScene.nama }}</h2>
+
+        <p>{{ selectedScene.deskripsi }}</p>
+      </div>
+    </section>
+
+    <section class="scene-section">
+      <div class="section-heading">
+        <div>
+          <h2>Pilih Lokasi</h2>
+
+          <p>Jelajahi lokasi lainnya.</p>
+        </div>
+
+        <span class="scene-count"> {{ scenes.length }} lokasi </span>
+      </div>
+
+      <div class="scene-list">
+        <button
+          type="button"
+          class="scene-card"
+          *ngFor="let scene of scenes"
+          [class.active]="scene.id === selectedScene.id"
+          (click)="pilihScene(scene)"
+        >
+          <div class="scene-thumbnail">
+            <img [src]="scene.gambar" [alt]="scene.nama" />
+
+            <div class="scene-thumbnail-icon">
+              <ion-icon [name]="scene.icon"></ion-icon>
+            </div>
+          </div>
+
+          <div class="scene-card-info">
+            <strong> {{ scene.nama }} </strong>
+
+            <span> Lihat panorama </span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section class="guide-card">
+      <div class="guide-icon">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </div>
+
+      <div>
+        <strong> Cara menggunakan Virtual Tour </strong>
+
+        <p>
+          Geser gambar untuk melihat sekeliling, gunakan tombol + dan − untuk
+          mengatur tampilan, lalu pilih titik lokasi untuk berpindah area.
+        </p>
+      </div>
+    </section>
+
+    <div class="bottom-space"></div>
+  </main>
+</ion-content>

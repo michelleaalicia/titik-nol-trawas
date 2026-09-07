@@ -1,0 +1,200 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="page-container header-inner">
+      <div class="brand">
+        <img
+          src="assets/icon/logo.png"
+          alt="Titik Nol Trawas"
+          class="brand-logo"
+        />
+
+        <span class="brand-name">Titik Nol Trawas</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="beranda-content" [fullscreen]="true">
+  <main class="page-container">
+    <div class="search-wrapper">
+      <ion-searchbar
+        mode="ios"
+        placeholder="Cari tempat wisata..."
+        class="custom-search"
+        [showClearButton]="'never'"
+      ></ion-searchbar>
+    </div>
+
+    <section class="hero-section">
+      <div class="hero-card" routerLink="/tabs/wisata">
+        <img
+          src="assets/images/banner/banner-trawas.jpg"
+          alt="Pesona Alam Trawas"
+          class="hero-image"
+        />
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+          <span class="hero-badge"> Destinasi Terbaru </span>
+
+          <h1>Pesona Alam Trawas</h1>
+
+          <p>Jelajahi keindahan alam Trawas</p>
+        </div>
+
+        <div class="hero-dots">
+          <span class="active"></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-header">
+        <h2>Berita Terbaru</h2>
+
+        <a routerLink="/daftar-berita" class="see-all"> Lihat Semua </a>
+      </div>
+
+      <div class="news-list">
+        <a
+          class="news-card"
+          *ngFor="let berita of beritaTerbaru"
+          [routerLink]="['/detail-berita', berita.id]"
+        >
+          <img [src]="berita.gambar" [alt]="berita.judul" class="news-image" />
+
+          <div class="news-content">
+            <span class="news-date"> {{ berita.tanggal }} </span>
+
+            <h3>{{ berita.judul }}</h3>
+
+            <p>{{ berita.excerpt }}</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-header">
+        <h2>Event Terdekat</h2>
+
+        <a routerLink="/tabs/event" class="see-all"> Lihat Semua </a>
+      </div>
+
+      <div class="horizontal-list">
+        <article class="event-card" *ngFor="let event of eventTerdekat">
+          <div class="event-image-wrapper">
+            <img [src]="event.gambar" [alt]="event.judul" class="event-image" />
+
+            <div class="event-date">
+              <strong>{{ event.tanggal }}</strong>
+              <span>{{ event.bulan }}</span>
+            </div>
+          </div>
+
+          <div class="event-content">
+            <h3>{{ event.judul }}</h3>
+
+            <div class="meta">
+              <ion-icon name="location-outline"></ion-icon>
+
+              <span> {{ event.lokasi }} </span>
+            </div>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              [routerLink]="['/detail-event', event.id]"
+            >
+              Lihat Detail
+            </ion-button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-header">
+        <h2>Destinasi Populer</h2>
+      </div>
+
+      <div class="horizontal-list">
+        <article class="destination-card" *ngFor="let dest of destinasiPopuler">
+          <div class="destination-image-wrapper">
+            <img
+              [src]="dest.gambar"
+              [alt]="dest.nama"
+              class="destination-image"
+            />
+
+            <button
+              type="button"
+              class="favorite-button"
+              (click)="$event.stopPropagation()"
+            >
+              <ion-icon name="heart-outline"></ion-icon>
+            </button>
+          </div>
+
+          <div class="destination-content">
+            <div class="destination-title-row">
+              <h3>{{ dest.nama }}</h3>
+
+              <span class="rating">
+                <ion-icon name="star"></ion-icon>
+                {{ dest.rating }}
+              </span>
+            </div>
+
+            <p class="price">{{ dest.harga }}</p>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              [routerLink]="['/detail-wisata', dest.id]"
+            >
+              Lihat Detail
+            </ion-button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="virtual-tour-card" routerLink="/tabs/virtual-tour">
+        <img
+          src="assets/images/virtual-tour/virtual-tour-bg.jpg"
+          alt="Virtual Tour Trawas"
+          class="virtual-tour-image"
+        />
+
+        <div class="virtual-tour-overlay"></div>
+
+        <div class="virtual-tour-content">
+          <span class="virtual-tour-label">
+            <ion-icon name="camera-outline"></ion-icon>
+            VIRTUAL TOUR 360°
+          </span>
+
+          <h2>Jelajahi Trawas dari Rumah</h2>
+
+          <p>Rasakan pengalaman menjelajahi keindahan Trawas secara virtual.</p>
+
+          <ion-button
+            shape="round"
+            color="primary"
+            routerLink="/tabs/virtual-tour"
+          >
+            Mulai Virtual Tour
+          </ion-button>
+        </div>
+      </div>
+    </section>
+  </main>
+</ion-content>
