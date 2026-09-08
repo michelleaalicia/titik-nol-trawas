@@ -8,16 +8,12 @@ import {
   IonContent,
   IonSearchbar,
   IonIcon,
+  IonButton,
 } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
 
-import {
-  calendarOutline,
-  locationOutline,
-  arrowForwardOutline,
-  searchOutline,
-} from 'ionicons/icons';
+import { calendarOutline, locationOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-event',
@@ -30,6 +26,7 @@ import {
     IonContent,
     IonSearchbar,
     IonIcon,
+    IonButton,
   ],
   templateUrl: './event.page.html',
   styleUrls: ['./event.page.scss'],
@@ -40,7 +37,6 @@ export class EventPage {
   selectedFilter = 'Semua';
 
   searchTerm = '';
-  showSearch = false;
 
   eventList = [
     {
@@ -76,8 +72,6 @@ export class EventPage {
     addIcons({
       'calendar-outline': calendarOutline,
       'location-outline': locationOutline,
-      'arrow-forward-outline': arrowForwardOutline,
-      'search-outline': searchOutline,
     });
   }
 
@@ -100,14 +94,6 @@ export class EventPage {
 
   pilihFilter(filter: string) {
     this.selectedFilter = filter;
-  }
-
-  toggleSearch() {
-    this.showSearch = !this.showSearch;
-
-    if (!this.showSearch) {
-      this.searchTerm = '';
-    }
   }
 
   onSearch(event: any) {

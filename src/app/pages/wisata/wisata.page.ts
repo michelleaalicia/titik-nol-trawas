@@ -18,7 +18,6 @@ import {
   pricetagOutline,
   timeOutline,
   locationOutline,
-  arrowForwardOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -85,7 +84,6 @@ export class WisataPage {
       'pricetag-outline': pricetagOutline,
       'time-outline': timeOutline,
       'location-outline': locationOutline,
-      'arrow-forward-outline': arrowForwardOutline,
     });
   }
 
