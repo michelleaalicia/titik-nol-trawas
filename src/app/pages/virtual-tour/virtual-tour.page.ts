@@ -1,31 +1,44 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-import { IonContent, IonIcon } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonContent, IonIcon } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
 
 import {
-  add,
-  remove,
-  expandOutline,
   informationCircleOutline,
   locationOutline,
-  arrowBack,
   cafeOutline,
   flowerOutline,
   walkOutline,
 } from 'ionicons/icons';
 
+interface TourScene {
+  id: number;
+  nama: string;
+  deskripsi: string;
+  icon: string;
+  posisi: {
+    left: string;
+    top: string;
+  };
+  gambar: string;
+}
+
 @Component({
   selector: 'app-virtual-tour',
   standalone: true,
-  imports: [CommonModule, IonContent, IonIcon],
+  imports: [CommonModule, IonHeader, IonToolbar, IonContent, IonIcon],
   templateUrl: './virtual-tour.page.html',
   styleUrls: ['./virtual-tour.page.scss'],
 })
 export class VirtualTourPage {
-  scenes = [
+  private readonly demoPanorama = 'https://pannellum.org/images/alma.jpg';
+
+  panoramaUrl: SafeResourceUrl;
+
+  scenes: TourScene[] = [
     {
       id: 1,
       nama: 'Cafe Hutan',
@@ -61,84 +74,31 @@ export class VirtualTourPage {
     },
   ];
 
-  selectedScene = this.scenes[0];
+  selectedScene: TourScene = this.scenes[0];
 
-  zoom = 1;
-
-  isDragging = false;
-
-  private startX = 0;
-  private currentOffset = 0;
-  offset = 0;
-
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
     addIcons({
-      add,
-      remove,
-      'expand-outline': expandOutline,
       'information-circle-outline': informationCircleOutline,
       'location-outline': locationOutline,
-      'arrow-back': arrowBack,
       'cafe-outline': cafeOutline,
       'flower-outline': flowerOutline,
       'walk-outline': walkOutline,
     });
+
+    this.panoramaUrl = this.createPanoramaUrl();
   }
 
-  pilihScene(scene: any) {
+  private createPanoramaUrl(): SafeResourceUrl {
+    const viewerUrl =
+      'https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg';
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(viewerUrl);
+  }
+
+  pilihScene(scene: TourScene): void {
     this.selectedScene = scene;
-    this.zoom = 1;
-    this.offset = 0;
-  }
 
-  zoomIn() {
-    if (this.zoom < 1.6) {
-      this.zoom += 0.1;
-    }
-  }
-
-  zoomOut() {
-    if (this.zoom > 0.8) {
-      this.zoom -= 0.1;
-    }
-  }
-
-  mulaiDrag(event: MouseEvent | TouchEvent) {
-    this.isDragging = true;
-
-    if (event instanceof MouseEvent) {
-      this.startX = event.clientX;
-    } else {
-      this.startX = event.touches[0].clientX;
-    }
-
-    this.currentOffset = this.offset;
-  }
-
-  saatDrag(event: MouseEvent | TouchEvent) {
-    if (!this.isDragging) {
-      return;
-    }
-
-    let currentX = 0;
-
-    if (event instanceof MouseEvent) {
-      currentX = event.clientX;
-    } else {
-      currentX = event.touches[0].clientX;
-    }
-
-    const difference = currentX - this.startX;
-
-    this.offset = this.currentOffset + difference;
-  }
-
-  selesaiDrag() {
-    this.isDragging = false;
-  }
-
-  resetView() {
-    this.zoom = 1;
-    this.offset = 0;
+    // Memuat ulang viewer saat berpindah lokasi.
+    this.panoramaUrl = this.createPanoramaUrl();
   }
 }

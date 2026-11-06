@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { DATA_WISATA } from '../wisata/wisata.page';
+import { DATA_BERITA, DATA_EVENT } from '../data/konten.data';
 
 import {
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonContent,
-  IonSearchbar,
   IonButton,
   IonIcon,
 } from '@ionic/angular';
@@ -25,6 +25,7 @@ import {
   star,
   cameraOutline,
   searchOutline,
+  arrowForwardOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -35,9 +36,7 @@ import {
     RouterLink,
     IonHeader,
     IonToolbar,
-    IonTitle,
     IonContent,
-    IonSearchbar,
     IonButton,
     IonIcon,
   ],
@@ -45,60 +44,51 @@ import {
   styleUrls: ['./beranda.page.scss'],
 })
 export class BerandaPage {
-  beritaTerbaru = [
+  bannerAktif = 0;
+  bannerList = [
     {
-      id: 1,
-      judul: 'Trawas Culture Fest 2026 Kembali Digelar',
-      tanggal: '5 Ags 2026',
-      excerpt:
-        'Trawas, sebuah permata tersembunyi di lereng Gunung Penanggungan...',
-      gambar: 'assets/images/berita/news-1.jpg',
+      kategori: 'Titik Nol Trawas',
+      judul: 'Jelajahi Titik Nol Trawas',
+      deskripsi: 'Geser untuk melihat tempat menarik di sekitarnya.',
+      gambar: 'assets/images/banner/titik-nol-cover.jpg',
+      link: '/tabs/wisata',
+      cover: true,
     },
-    {
-      id: 2,
-      judul: '5 Rekomendasi Spot Nongkrong Baru di Kaki Gunung Arjuno',
-      tanggal: '1 Ags 2026',
-      excerpt:
-        'Menjelajahi tempat-tempat bersantai terbaru yang menawarkan perpaduan kopi nikmat...',
-      gambar: 'assets/images/berita/news-2.jpg',
-    },
+    ...DATA_WISATA.slice(0, 3).map((tempat) => ({
+      kategori: tempat.kategori,
+      judul: tempat.nama,
+      deskripsi: 'Lihat informasi tempat dan lokasi di Maps.',
+      gambar: tempat.gambar,
+      link: '/detail-wisata/' + tempat.id,
+      cover: false,
+    })),
   ];
 
-  eventTerdekat = [
-    {
-      id: 1,
-      judul: 'Senja Akustik di Titik Nol',
-      lokasi: 'Amfiteater Titik Nol Trawas',
-      tanggal: '20',
-      bulan: 'Ags',
-      gambar: 'assets/images/event/event-1.jpg',
-    },
-    {
-      id: 2,
-      judul: 'Yoga Pagi di Alam Bike Fun Ride',
-      lokasi: 'Taman Ghanjaran Trawas',
-      tanggal: '25',
-      bulan: 'Ags',
-      gambar: 'assets/images/event/event-2.jpg',
-    },
-  ];
+  onBannerScroll(event: Event) {
+    const slider = event.target as HTMLElement;
+    this.bannerAktif = Math.round(
+      slider.scrollLeft / (slider.clientWidth + 12),
+    );
+  }
 
-  destinasiPopuler = [
-    {
-      id: 1,
-      nama: 'Air Terjun Dlundung',
-      rating: 4.8,
-      harga: 'Rp 15.000',
-      gambar: 'assets/images/destinasi/destinasi-1.jpg',
-    },
-    {
-      id: 2,
-      nama: 'Candi Jolotundo',
-      rating: 4.6,
-      harga: 'Gratis',
-      gambar: 'assets/images/destinasi/destinasi-2.jpg',
-    },
-  ];
+  pilihBanner(index: number, slider: HTMLElement) {
+    slider.scrollTo({ left: index * (slider.clientWidth + 12) });
+  }
+
+  bannerBerikutnya(slider: HTMLElement) {
+    const indexBerikutnya = (this.bannerAktif + 1) % this.bannerList.length;
+
+    this.pilihBanner(indexBerikutnya, slider);
+  }
+
+  beritaTerbaru = DATA_BERITA.slice(0, 3);
+
+  eventTerdekat = DATA_EVENT.slice(0, 3).map((event) => ({
+    ...event,
+    tanggal: event.tanggalAngka,
+  }));
+
+  destinasiPopuler = DATA_WISATA.slice(0, 3);
 
   constructor() {
     addIcons({
@@ -112,6 +102,7 @@ export class BerandaPage {
       star,
       'camera-outline': cameraOutline,
       'search-outline': searchOutline,
+      'arrow-forward-outline': arrowForwardOutline,
     });
   }
 }

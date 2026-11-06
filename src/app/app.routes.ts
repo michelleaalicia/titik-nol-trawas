@@ -12,6 +12,11 @@ export const routes: Routes = [
       import('./pages/tabs/tabs.page').then((m) => m.TabsPage),
     children: [
       {
+        path: 'berita',
+        loadComponent: () =>
+          import('./pages/berita/berita.page').then((m) => m.BeritaPage),
+      },
+      {
         path: 'beranda',
         loadComponent: () =>
           import('./pages/beranda/beranda.page').then((m) => m.BerandaPage),
@@ -61,10 +66,8 @@ export const routes: Routes = [
   },
   {
     path: 'daftar-berita',
-    loadComponent: () =>
-      import('./pages/daftar-berita/daftar-berita.page').then(
-        (m) => m.DaftarBeritaPage,
-      ),
+    redirectTo: 'tabs/berita',
+    pathMatch: 'full',
   },
   {
     path: 'detail-berita/:id',
@@ -73,4 +76,5 @@ export const routes: Routes = [
         (m) => m.DetailBeritaPage,
       ),
   },
+  { path: '**', redirectTo: 'tabs/beranda' },
 ];

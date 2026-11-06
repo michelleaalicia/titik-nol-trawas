@@ -1,22 +1,9 @@
 :host {
-  --ion-color-primary: #0d631b;
-}
-
-ion-toolbar {
-  --background: #f8faf8;
-}
-.header-title {
-  color: #0d631b;
-  font-weight: 700;
-  font-size: 22px;
-  text-align: center;
-}
-.spacer {
-  width: 40px;
+  --ion-color-primary: var(--tn-green);
 }
 
 .detail-berita-content {
-  --background: #f8faf8;
+  --background: var(--tn-background);
 }
 
 .main-wrap {
@@ -45,8 +32,8 @@ ion-toolbar {
 }
 
 .article-card {
-  background: #fff;
-  border: 1px solid #e1e3e1;
+  background: var(--tn-surface);
+  border: 1px solid var(--tn-border);
   border-radius: 16px;
   padding: 17px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -60,21 +47,13 @@ ion-toolbar {
   align-items: center;
   gap: 8px;
 }
-.kategori-chip {
-  background: rgba(156, 244, 156, 0.2);
-  color: #19722b;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  padding: 4px 12px;
-  border-radius: 9999px;
-}
+
 .tanggal {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 14px;
-  color: #40493d;
+  font-size: var(--tn-font-body);
+  color: var(--tn-text-secondary);
   ion-icon {
     font-size: 14px;
   }
@@ -82,8 +61,8 @@ ion-toolbar {
 
 .article-card h1 {
   font-weight: 700;
-  font-size: 28px;
-  color: #191c1b;
+  font-size: var(--tn-font-title);
+  color: var(--tn-text);
   margin: 0 0 16px;
   line-height: 1.29;
 }
@@ -92,30 +71,30 @@ ion-toolbar {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid #e1e3e1;
+  border-bottom: 1px solid var(--tn-border);
   padding-bottom: 17px;
 }
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #2e7d32;
-  color: #cbffc2;
+  background: var(--tn-green);
+  color: var(--tn-green-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: var(--tn-font-card);
   flex-shrink: 0;
 }
 .author-name {
-  font-size: 14px;
+  font-size: var(--tn-font-body);
   font-weight: 500;
-  color: #191c1b;
+  color: var(--tn-text);
   margin: 0;
 }
 .read-time {
-  font-size: 14px;
-  color: #40493d;
+  font-size: var(--tn-font-body);
+  color: var(--tn-text-secondary);
   margin: 0;
 }
 
@@ -126,30 +105,30 @@ ion-toolbar {
   padding-top: 8px;
 
   p {
-    font-size: 16px;
-    color: #40493d;
+    font-size: var(--tn-font-card);
+    color: var(--tn-text-secondary);
     line-height: 1.625;
     margin: 0;
   }
 
   h2 {
     font-weight: 600;
-    font-size: 22px;
-    color: #191c1b;
+    font-size: var(--tn-font-title);
+    color: var(--tn-text);
     margin: 0;
     line-height: 1.27;
   }
 }
 
 blockquote {
-  background: #f2f4f2;
-  border-left: 4px solid #0d631b;
+  background: var(--tn-green-light);
+  border-left: 4px solid var(--tn-green);
   border-radius: 12px;
   padding: 16px 16px 16px 20px;
   margin: 0;
   font-style: italic;
-  font-size: 16px;
-  color: #191c1b;
+  font-size: var(--tn-font-card);
+  color: var(--tn-text);
   line-height: 1.5;
 }
 
@@ -168,17 +147,76 @@ blockquote {
   }
   ion-icon {
     font-size: 17px;
-    color: #0d631b;
+    color: var(--tn-green);
     flex-shrink: 0;
     margin-top: 4px;
   }
   strong {
-    color: #40493d;
+    color: var(--tn-text-secondary);
     font-weight: 700;
   }
   span {
-    font-size: 16px;
-    color: #40493d;
+    font-size: var(--tn-font-card);
+    color: var(--tn-text-secondary);
     line-height: 1.625;
   }
+}
+
+.detail-berita-header {
+  background: var(--tn-surface);
+  box-shadow: none;
+  z-index: 100;
+}
+
+.detail-berita-header ion-toolbar {
+  --background: var(--tn-surface);
+  --min-height: 56px;
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-width: 0;
+}
+
+.detail-berita-header .detail-header {
+  width: 100%;
+  max-width: 680px;
+  height: 56px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--tn-text);
+  font-size: var(--tn-font-body);
+  font-weight: 700;
+}
+
+.detail-berita-header .back-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 1px solid var(--tn-border);
+  border-radius: 50%;
+
+  background: var(--tn-surface);
+  color: var(--tn-green);
+
+  cursor: pointer;
+}
+
+.detail-berita-header .back-button ion-icon {
+  font-size: 19px;
+}
+
+.detail-berita-header .header-spacer {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
 }

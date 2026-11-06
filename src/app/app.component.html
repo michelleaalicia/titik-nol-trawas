@@ -1,3 +1,25 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet [attr.inert]="launching() ? '' : null"
+    [attr.aria-hidden]="launching() ? 'true' : null"></ion-router-outlet>
+
+  @if (launching()) {
+    <section class="launch-screen" aria-label="Titik Nol Trawas">
+      <div class="launch-brand">
+        <div class="launch-logo"><img src="assets/icon/logo.png" alt="" /></div>
+        <p class="launch-eyebrow">SELAMAT DATANG DI</p>
+        <h1>Titik Nol <span>Trawas</span></h1>
+        <p class="launch-tagline">Informasi wisata Trawas</p>
+      </div>
+      <div class="launch-status" role="status" aria-live="polite">
+        @if (launchError()) {
+          <p>Aplikasi belum bisa dibuka. Coba muat ulang.</p>
+          <button type="button" (click)="retryLaunch()">Coba lagi</button>
+        } @else {
+          <span class="launch-spinner" aria-hidden="true"></span>
+          <p>Memuat…</p>
+        }
+      </div>
+      <div class="launch-footer" aria-hidden="true"></div>
+    </section>
+  }
 </ion-app>

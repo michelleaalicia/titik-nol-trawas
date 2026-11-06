@@ -1,99 +1,145 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <div class="page-container header-inner">
-      <div class="brand">
-        <img
-          src="assets/icon/logo.png"
-          alt="Titik Nol Trawas"
-          class="brand-logo"
-        />
-
-        <span class="brand-name">Titik Nol Trawas</span>
-      </div>
+    <div class="app-brand">
+      <img src="assets/icon/logo.png" alt="Logo Titik Nol Trawas" />
+      <span>Titik Nol Trawas</span>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="event-content" [fullscreen]="true">
+<ion-content class="event-content">
   <main class="page-container">
     <header class="page-header">
-      <h1>Event Mendatang</h1>
-
-      <p>Temukan berbagai kegiatan seru di sekitar Trawas.</p>
-
-      <div class="search-wrapper">
-        <ion-searchbar
-          mode="ios"
-          placeholder="Cari event..."
-          [showClearButton]="'focus'"
-          class="custom-search"
-          (ionInput)="onSearch($event)"
-        ></ion-searchbar>
-      </div>
+      <h1>Temukan Event</h1>
+      <p>Temukan kegiatan di sekitar Titik Nol Trawas.</p>
     </header>
 
-    <div class="filter-wrapper">
-      <div class="filter-scroll">
-        <button
-          type="button"
-          class="filter-chip"
-          *ngFor="let filter of filterList"
-          [class.active]="filter === selectedFilter"
-          (click)="pilihFilter(filter)"
-        >
-          {{ filter }}
-        </button>
-      </div>
+    <!-- Pencarian -->
+    <ion-searchbar
+      class="custom-search"
+      mode="ios"
+      placeholder="Cari nama event..."
+      aria-label="Cari nama event"
+      showClearButton="focus"
+      [value]="searchTerm"
+      [debounce]="0"
+      (ionInput)="searchTerm = $event.detail.value || ''"
+      (ionClear)="searchTerm = ''"
+    ></ion-searchbar>
+
+    <!-- Tombol filter -->
+    <div class="filter-row" aria-label="Filter event">
+      <button
+        type="button"
+        class="filter-button"
+        aria-haspopup="dialog"
+        [class.active]="selectedKategori !== 'semua'"
+        (click)="bukaFilter('kategori')"
+      >
+        <span>Kategori</span>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+
+      <button
+        type="button"
+        class="filter-button"
+        aria-haspopup="dialog"
+        [class.active]="selectedHarga !== 'semua'"
+        (click)="bukaFilter('harga')"
+      >
+        <span>Harga</span>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+
+      <button
+        type="button"
+        class="filter-button"
+        aria-haspopup="dialog"
+        [class.active]="selectedWaktu !== 'semua'"
+        (click)="bukaFilter('waktu')"
+      >
+        <span>Waktu</span>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
     </div>
 
+    <!-- Filter aktif -->
+    <div class="active-filters" *ngIf="adaFilter">
+      <span *ngIf="selectedKategori !== 'semua'"> {{ selectedKategori }} </span>
+
+      <span *ngIf="selectedHarga !== 'semua'"> {{ labelHarga }} </span>
+
+      <span *ngIf="selectedWaktu !== 'semua'"> {{ labelWaktu }} </span>
+
+      <button type="button" (click)="resetFilter()">Reset filter</button>
+    </div>
+
+    <!-- Jumlah hasil -->
     <div class="result-header">
-      <div>
-        <h2>Event Terbaru</h2>
-        <span>{{ filteredEvents.length }} event tersedia</span>
-      </div>
+      <h2>Daftar Event</h2>
+
+      <span role="status" aria-live="polite">
+        {{ filteredEvents.length }} event ditemukan
+      </span>
     </div>
 
+    <!-- Hasil kosong -->
     <div class="empty-state" *ngIf="filteredEvents.length === 0">
-      <div class="empty-icon">
-        <ion-icon name="calendar-outline"></ion-icon>
-      </div>
+      <ion-icon name="calendar-outline"></ion-icon>
 
       <h3>Event tidak ditemukan</h3>
+      <p>Coba kata kunci lain atau hapus filter yang dipilih.</p>
 
-      <p>Coba gunakan kata kunci atau filter yang berbeda.</p>
+      <ion-button fill="outline" shape="round" (click)="resetSemua()">
+        Tampilkan semua event
+      </ion-button>
     </div>
 
-    <div class="event-list" *ngIf="filteredEvents.length > 0">
+    <!-- Daftar kartu -->
+    <div class="event-list">
       <article class="event-card" *ngFor="let event of filteredEvents">
-        <a class="event-image-link" [routerLink]="['/detail-event', event.id]">
-          <div class="event-image-wrapper">
-            <img [src]="event.gambar" [alt]="event.judul" class="event-image" />
+        <a
+          class="event-image-link"
+          [routerLink]="['/detail-event', event.id]"
+          [attr.aria-label]="'Lihat detail ' + event.judul"
+        >
+          <img [src]="event.gambar" [alt]="event.judul" loading="lazy" />
 
-            <span class="status-badge" [class.free]="event.gratis">
-              {{ event.gratis ? 'Gratis' : 'Berbayar' }}
-            </span>
-          </div>
+          <!-- KATEGORI: kiri atas -->
+          <span class="category-badge"> {{ event.kategori }} </span>
+
+          <!-- HARGA: kanan atas -->
+          <span class="status-badge" [class.free]="event.harga === 0">
+            <ng-container *ngIf="event.harga > 0; else gratisLabel">
+              <ion-icon name="pricetag-outline"></ion-icon>
+              {{ formatHarga(event.harga) }}
+            </ng-container>
+
+            <ng-template #gratisLabel>Gratis</ng-template>
+          </span>
         </a>
 
         <div class="event-body">
           <h3>{{ event.judul }}</h3>
 
-          <div class="event-meta">
-            <div class="meta-item">
-              <ion-icon name="calendar-outline"></ion-icon>
-              <span>{{ event.tanggal }}</span>
-            </div>
+          <p class="event-description">{{ event.deskripsi }}</p>
 
-            <div class="meta-item">
+          <div class="event-meta">
+            <span>
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ event.tanggal }}
+            </span>
+
+            <span>
               <ion-icon name="location-outline"></ion-icon>
-              <span>{{ event.lokasi }}</span>
-            </div>
+              {{ event.lokasi }}
+            </span>
           </div>
 
           <ion-button
             expand="block"
             shape="round"
-            color="primary"
+            class="detail-button"
             [routerLink]="['/detail-event', event.id]"
           >
             Lihat Detail
@@ -101,5 +147,51 @@
         </div>
       </article>
     </div>
-  </main>
-</ion-content>
+
+    <!-- Panel pilihan filter -->
+    <ion-modal
+      class="filter-modal"
+      [isOpen]="panelTerbuka"
+      [initialBreakpoint]="1"
+      [breakpoints]="[0, 1]"
+      (didDismiss)="panelTerbuka = false"
+      aria-labelledby="event-filter-title"
+    >
+      <ng-template>
+        <section class="filter-sheet">
+          <div class="sheet-header">
+            <div>
+              <h2 id="event-filter-title">{{ judulPanel }}</h2>
+            </div>
+
+            <button
+              type="button"
+              class="close-button"
+              aria-label="Tutup filter"
+              (click)="panelTerbuka = false"
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+
+          <div class="sheet-options">
+            <button
+              type="button"
+              class="option-button"
+              *ngFor="let opsi of pilihanPanel"
+              [class.selected]="nilaiPanel === opsi.id"
+              [attr.aria-pressed]="nilaiPanel === opsi.id"
+              (click)="pilihFilter(opsi.id)"
+            >
+              <span>{{ opsi.label }}</span>
+
+              <ion-icon
+                *ngIf="nilaiPanel === opsi.id"
+                name="checkmark-circle"
+              ></ion-icon>
+            </button>
+          </div>
+        </section>
+      </ng-template>
+    </ion-modal></main
+></ion-content>

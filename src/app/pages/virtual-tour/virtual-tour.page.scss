@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .virtual-tour-content {
@@ -37,7 +38,7 @@
 .brand-name {
   color: var(--tn-green);
 
-  font-size: 14px;
+  font-size: var(--tn-font-body);
   font-weight: 700;
 }
 
@@ -52,7 +53,7 @@
 
   color: var(--tn-green);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -62,7 +63,7 @@
 
   color: var(--tn-text);
 
-  font-size: 20px;
+  font-size: var(--tn-font-title);
   line-height: 1.25;
   font-weight: 700;
 }
@@ -74,7 +75,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 11px;
+  font-size: var(--tn-font-small);
   line-height: 1.5;
 }
 
@@ -84,74 +85,39 @@
 
 .panorama {
   position: relative;
-
   width: 100%;
   height: 330px;
-
   overflow: hidden;
-
-  border-radius: var(--tn-radius-md);
-
-  background: #1c251d;
-
-  cursor: grab;
-
-  user-select: none;
-  touch-action: pan-y;
+  border-radius: 16px;
+  background: #111;
 }
 
-.panorama.dragging {
-  cursor: grabbing;
-}
-
-.panorama-image {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width: 150%;
+.panorama-frame {
+  display: block;
+  width: 100%;
   height: 100%;
-
-  max-width: none;
-
-  object-fit: cover;
-
-  transform-origin: center center;
-
-  will-change: transform;
-
-  pointer-events: none;
-
-  transition: transform 0.15s ease;
-}
-
-.panorama.dragging .panorama-image {
-  transition: none;
+  border: 0;
 }
 
 .panorama-overlay {
   position: absolute;
+  z-index: 2;
   inset: 0;
-
   background:
     linear-gradient(to bottom, rgba(0, 0, 0, 0.32), transparent 30%),
     linear-gradient(to top, rgba(0, 0, 0, 0.42), transparent 35%);
-
   pointer-events: none;
 }
 
 .viewer-top {
   position: absolute;
-
+  z-index: 4;
   top: 12px;
   left: 12px;
   right: 12px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   pointer-events: none;
 }
 
@@ -166,9 +132,9 @@
 
   background: rgba(0, 0, 0, 0.55);
 
-  color: #ffffff;
+  color: var(--tn-surface);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 
   backdrop-filter: blur(6px);
@@ -178,51 +144,17 @@
   font-size: 13px;
 }
 
-.expand-button {
-  width: 34px;
-  height: 34px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.92);
-
-  color: var(--tn-text);
-
-  cursor: pointer;
-
-  pointer-events: auto;
-}
-
-.expand-button ion-icon {
-  font-size: 16px;
-}
-
 .hotspot {
   position: absolute;
-
-  z-index: 3;
-
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: 0;
-
   border: none;
-
   background: transparent;
-
-  color: #ffffff;
-
+  color: var(--tn-surface);
   cursor: pointer;
-
   transform: translate(-50%, -50%);
 }
 
@@ -266,14 +198,14 @@
 
   white-space: nowrap;
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 
   backdrop-filter: blur(5px);
 }
 
 .hotspot.active .hotspot-icon {
-  background: #ffffff;
+  background: var(--tn-surface);
 
   color: var(--tn-green);
 
@@ -316,75 +248,18 @@
   }
 }
 
-.zoom-controls {
-  position: absolute;
-
-  right: 12px;
-  bottom: 42px;
-
-  z-index: 4;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-
-  border-radius: 10px;
-
-  background: rgba(255, 255, 255, 0.95);
-
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
-}
-
-.zoom-controls button {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: var(--tn-text);
-
-  cursor: pointer;
-}
-
-.zoom-controls button + button {
-  border-top: 1px solid var(--tn-border);
-}
-
-.zoom-controls ion-icon {
-  font-size: 17px;
-}
-
 .drag-hint {
   position: absolute;
-
+  z-index: 4;
   left: 50%;
   bottom: 12px;
-
-  z-index: 3;
-
   padding: 5px 9px;
-
   border-radius: 7px;
-
   background: rgba(0, 0, 0, 0.5);
-
-  color: #ffffff;
-
-  font-size: 8px;
-
+  color: var(--tn-surface);
+  font-size: var(--tn-font-small);
   transform: translateX(-50%);
-
   pointer-events: none;
-
   opacity: 0.9;
 }
 
@@ -397,7 +272,7 @@
   margin-top: 12px;
   padding: 12px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   border: 1px solid var(--tn-border);
   border-radius: var(--tn-radius-md);
@@ -433,7 +308,7 @@
 
   color: var(--tn-text-light);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
 }
 
 .scene-info-content h2 {
@@ -441,7 +316,7 @@
 
   color: var(--tn-text);
 
-  font-size: 14px;
+  font-size: var(--tn-font-body);
   font-weight: 700;
 }
 
@@ -450,7 +325,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   line-height: 1.5;
 }
 
@@ -471,7 +346,7 @@
 
   color: var(--tn-text);
 
-  font-size: 16px;
+  font-size: var(--tn-font-card);
   font-weight: 700;
 }
 
@@ -480,13 +355,13 @@
 
   color: var(--tn-text-light);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
 }
 
 .scene-count {
   color: var(--tn-green);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 }
 
@@ -521,7 +396,7 @@
   border: 1px solid var(--tn-border);
   border-radius: 11px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   text-align: left;
 
@@ -593,7 +468,7 @@
 
   color: var(--tn-text);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
 
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -606,7 +481,7 @@
 
   color: var(--tn-text-light);
 
-  font-size: 8px;
+  font-size: var(--tn-font-small);
 }
 
 .guide-card {
@@ -620,7 +495,7 @@
 
   background: var(--tn-green-light);
 
-  border: 1px solid #d8ead9;
+  border: 1px solid var(--tn-border);
   border-radius: var(--tn-radius-md);
 }
 
@@ -636,7 +511,7 @@
 
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   color: var(--tn-green);
 }
@@ -650,7 +525,7 @@
 
   color: var(--tn-text);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
 }
 
 .guide-card p {
@@ -658,7 +533,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   line-height: 1.45;
 }
 
@@ -707,6 +582,6 @@
   }
 
   .intro h1 {
-    font-size: 24px;
+    font-size: var(--tn-font-title);
   }
 }

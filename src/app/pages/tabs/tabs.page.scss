@@ -1,61 +1,23 @@
-ion-tabs {
-  --background: var(--tn-background);
-}
-
-ion-router-outlet {
-  position: relative;
-  z-index: 1;
-}
-
 ion-tab-bar {
-  height: 64px;
-  padding: 5px 8px 7px;
-
-  --background: #ffffff;
-
+  --background: var(--tn-surface);
   border-top: 1px solid var(--tn-border);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
-
-  z-index: 10;
+  height: auto;
+  min-height: 64px;
+  padding: 4px 0 env(safe-area-inset-bottom, 0px);
+  flex-shrink: 0;
 }
 
 ion-tab-button {
-  --color: #687068;
+  --color: var(--tn-text-secondary);
   --color-selected: var(--tn-green);
   --background: transparent;
-
+  --padding-start: 0;
+  --padding-end: 0;
   min-width: 0;
-  height: 100%;
-
-  font-size: 9px;
-  font-weight: 500;
+  min-height: 56px;
+  flex: 1;
 }
 
-ion-tab-button ion-icon {
-  font-size: 20px;
-  margin-bottom: 3px;
-}
-
-ion-tab-button ion-label {
-  margin: 0;
-  font-size: 9px;
-  font-weight: 500;
-}
-
-ion-tab-button.tab-selected ion-label {
-  font-weight: 700;
-}
-
-@media (min-width: 768px) {
-  ion-tab-bar {
-    height: 68px;
-  }
-
-  ion-tab-button ion-icon {
-    font-size: 21px;
-  }
-
-  ion-tab-button ion-label {
-    font-size: 10px;
-  }
-}
+ion-tab-button ion-icon { font-size: 22px; margin-bottom: 4px; }
+ion-tab-button ion-label { margin: 0; font-size: var(--tn-font-tab); white-space: nowrap; }
+ion-tab-button.tab-selected ion-label { font-weight: 700; }

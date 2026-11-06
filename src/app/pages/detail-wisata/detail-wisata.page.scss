@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .detail-content {
@@ -22,7 +23,7 @@
 
   color: var(--tn-text);
 
-  font-size: 15px;
+  font-size: var(--tn-font-body);
   font-weight: 700;
 }
 
@@ -39,7 +40,7 @@
   border: 1px solid var(--tn-border);
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   color: var(--tn-green);
 
@@ -107,9 +108,9 @@
 
   background: var(--tn-green);
 
-  color: #ffffff;
+  color: var(--tn-surface);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 }
 
@@ -127,16 +128,16 @@
 
   border-radius: 8px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   color: var(--tn-green);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 }
 
 .hero-rating ion-icon {
-  color: #e5a900;
+  color: var(--tn-star);
   font-size: 12px;
 }
 
@@ -149,7 +150,7 @@
 
   color: var(--tn-text);
 
-  font-size: 20px;
+  font-size: var(--tn-font-title);
   line-height: 1.25;
   font-weight: 700;
 }
@@ -163,7 +164,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
 }
 
 .location-row ion-icon {
@@ -191,7 +192,7 @@
 
   padding: 10px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   border: 1px solid var(--tn-border);
   border-radius: var(--tn-radius-md);
@@ -225,7 +226,7 @@
 
   color: var(--tn-text-light);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
 }
 
 .quick-card strong {
@@ -233,7 +234,7 @@
 
   color: var(--tn-text);
 
-  font-size: 11px;
+  font-size: var(--tn-font-small);
   line-height: 1.3;
 }
 
@@ -254,7 +255,7 @@
 
   color: var(--tn-text);
 
-  font-size: 16px;
+  font-size: var(--tn-font-card);
   line-height: 1.3;
   font-weight: 700;
 }
@@ -264,7 +265,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 11px;
+  font-size: var(--tn-font-small);
   line-height: 1.6;
 }
 
@@ -275,7 +276,7 @@
 
   padding: 12px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   border: 1px solid var(--tn-border);
   border-radius: var(--tn-radius-md);
@@ -311,7 +312,7 @@
 
   color: var(--tn-text);
 
-  font-size: 11px;
+  font-size: var(--tn-font-small);
 }
 
 .location-content p {
@@ -319,7 +320,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   line-height: 1.45;
 }
 
@@ -328,7 +329,7 @@
 
   margin: 8px 0 0;
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 
   text-transform: none;
@@ -351,7 +352,7 @@
 
   padding: 7px 9px;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   border: 1px solid var(--tn-border);
   border-radius: 10px;
@@ -381,7 +382,7 @@
 .facility-item span {
   color: var(--tn-text-secondary);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   line-height: 1.3;
 }
 
@@ -396,7 +397,7 @@
 
   font-family: inherit;
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 
   cursor: pointer;
@@ -447,7 +448,7 @@
 
   border: none;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   cursor: pointer;
 }
@@ -462,9 +463,9 @@
 
   background: rgba(0, 0, 0, 0.38);
 
-  color: #ffffff;
+  color: var(--tn-surface);
 
-  font-size: 11px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 }
 
@@ -479,7 +480,7 @@
 
   background: var(--tn-green-light);
 
-  border: 1px solid #d7ead9;
+  border: 1px solid var(--tn-border);
   border-radius: var(--tn-radius-md);
 }
 
@@ -495,7 +496,7 @@
 
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--tn-surface);
 
   color: var(--tn-green);
 }
@@ -515,7 +516,7 @@
 
   color: var(--tn-text);
 
-  font-size: 10px;
+  font-size: var(--tn-font-small);
   line-height: 1.3;
 }
 
@@ -526,7 +527,7 @@
 
   color: var(--tn-text-secondary);
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   line-height: 1.3;
 }
 
@@ -537,7 +538,7 @@
 
   margin: 0;
 
-  font-size: 9px;
+  font-size: var(--tn-font-small);
   font-weight: 600;
 
   text-transform: none;
@@ -568,10 +569,10 @@
   }
 
   .intro-section h1 {
-    font-size: 22px;
+    font-size: var(--tn-font-title);
   }
 
   .description {
-    font-size: 12px;
+    font-size: var(--tn-font-small);
   }
 }

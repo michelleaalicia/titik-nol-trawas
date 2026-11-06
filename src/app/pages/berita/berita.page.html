@@ -1,0 +1,135 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="app-brand">
+      <img src="assets/icon/logo.png" alt="" />
+      <span>Titik Nol Trawas</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="daftar-berita-content">
+  <div class="page-container">
+    <div class="page-header">
+      <h1>Temukan Berita</h1>
+      <p>Kumpulan berita di sekitar Titik Nol Trawas.</p>
+    </div>
+
+    <ion-searchbar
+      class="custom-search"
+      mode="ios"
+      placeholder="Cari judul berita..."
+      aria-label="Cari judul berita"
+      showClearButton="focus"
+      [value]="searchTerm"
+      [debounce]="0"
+      (ionInput)="searchTerm = $event.detail.value || ''"
+      (ionClear)="searchTerm = ''"
+    ></ion-searchbar>
+
+    <div class="filter-row">
+      <button
+        type="button"
+        class="filter-button"
+        [class.active]="selectedKategori !== 'semua'"
+        (click)="panelTerbuka = true"
+      >
+        <span>Kategori</span>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div class="active-filters" *ngIf="selectedKategori !== 'semua'">
+      <span>{{ labelKategori }}</span>
+
+      <button type="button" (click)="resetFilter()">Reset filter</button>
+    </div>
+
+    <div class="result-header">
+      <h2>Daftar Berita</h2>
+      <span>{{ beritaFiltered.length }} berita ditemukan</span>
+    </div>
+
+    <div class="news-list">
+      <div class="news-card" *ngFor="let berita of beritaFiltered">
+        <div class="news-image">
+          <img [src]="berita.gambar" [alt]="berita.judul" />
+
+          <span class="category-badge"> {{ berita.kategori }} </span>
+        </div>
+
+        <div class="news-content">
+          <span class="news-date">{{ berita.tanggal }}</span>
+
+          <h3>{{ berita.judul }}</h3>
+
+          <p>{{ berita.excerpt }}</p>
+
+          <ion-button
+            expand="block"
+            shape="round"
+            color="primary"
+            class="detail-button"
+            [routerLink]="['/detail-berita', berita.id]"
+          >
+            Baca Selengkapnya
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="beritaFiltered.length === 0">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <h3>Berita tidak ditemukan</h3>
+      <p>Coba kata kunci atau kategori lain.</p>
+
+      <ion-button fill="outline" shape="round" (click)="resetFilter()">
+        Tampilkan semua berita
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-modal
+  class="filter-modal"
+  [isOpen]="panelTerbuka"
+  [initialBreakpoint]="1"
+  [breakpoints]="[0, 1]"
+  (didDismiss)="panelTerbuka = false"
+>
+  <ng-template>
+    <section class="filter-sheet">
+      <div class="sheet-header">
+        <div>
+          <h2>Kategori berita</h2>
+          <p>Pilih kategori berita.</p>
+        </div>
+
+        <button
+          type="button"
+          class="close-button"
+          aria-label="Tutup filter"
+          (click)="panelTerbuka = false"
+        >
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sheet-options">
+        <button
+          type="button"
+          class="option-button"
+          *ngFor="let kategori of kategoriList"
+          [class.selected]="selectedKategori === kategori.id"
+          (click)="pilihKategori(kategori.id)"
+        >
+          <span>{{ kategori.label }}</span>
+
+          <ion-icon
+            *ngIf="selectedKategori === kategori.id"
+            name="checkmark-circle"
+          ></ion-icon>
+        </button>
+      </div>
+    </section>
+  </ng-template>
+</ion-modal>

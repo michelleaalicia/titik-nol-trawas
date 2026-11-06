@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="detail-header">
+      <button
+        type="button"
+        class="back-button"
+        aria-label="Kembali"
+        (click)="goBack()"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+
+      <span>Detail Berita</span>
+
+      <div class="header-spacer"></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detail-berita-content">
+  <div class="main-wrap">
+    <!-- Cover Image -->
+    <div class="cover-wrap">
+      <img [src]="berita.cover" [alt]="berita.judul" class="cover-image" />
+      <div class="cover-gradient"></div>
+    </div>
+
+    <!-- Article Header + Body -->
+    <div class="article-card">
+      <!-- Meta -->
+      <div class="meta-row">
+        <span class="kategori-chip">{{ berita.kategori }}</span>
+        <div class="tanggal">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ berita.tanggal }}</span>
+        </div>
+      </div>
+
+      <!-- Judul -->
+      <h1>{{ berita.judul }}</h1>
+
+      <!-- Author -->
+      <div class="author-row">
+        <div class="avatar">{{ berita.penulisInisial }}</div>
+        <div class="author-info">
+          <p class="author-name">{{ berita.penulis }}</p>
+          <p class="read-time">{{ berita.waktuBaca }}</p>
+        </div>
+      </div>
+
+      <!-- Body Content -->
+      <div class="article-body">
+        <p>{{ berita.paragraf1 }}</p>
+
+        <h2>{{ berita.subjudul }}</h2>
+        <p>{{ berita.paragraf2 }}</p>
+
+        <blockquote>"{{ berita.quote }}"</blockquote>
+
+        <p>{{ berita.pengantarList }}</p>
+
+        <ul class="check-list">
+          <li *ngFor="let item of berita.list">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <span>
+              <strong>{{ item.judul }}:</strong> {{ item.deskripsi }}
+            </span>
+          </li>
+        </ul>
+
+        <p>{{ berita.penutup }}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

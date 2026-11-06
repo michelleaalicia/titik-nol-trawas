@@ -1,42 +1,43 @@
-<ion-content class="detail-event-content" [fullscreen]="true">
-  <main class="page-container">
-    <header class="detail-header">
-      <button
-        type="button"
-        class="back-button"
-        aria-label="Kembali"
-        (click)="goBack()"
-      >
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
+<ion-header class="ion-no-border detail-event-header">
+  <div class="detail-header">
+    <button
+      type="button"
+      class="back-button"
+      aria-label="Kembali"
+      (click)="goBack()"
+    >
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
 
-      <span>Detail Event</span>
+    <span>Detail Event</span>
 
-      <div class="header-spacer"></div>
-    </header>
+    <div class="header-spacer"></div>
+  </div>
+</ion-header>
 
+<ion-content class="detail-event-content">
+  <main class="page-container" *ngIf="event; else kosong">
+    <!-- Gambar event -->
     <section class="hero-section">
       <div class="hero-image-wrapper">
         <img [src]="event.gambar" [alt]="event.judul" class="hero-image" />
-
-        <div class="hero-overlay"></div>
-
-        <span class="category-badge">
-          <ion-icon [name]="event.icon"></ion-icon>
-          {{ event.kategori }}
-        </span>
       </div>
     </section>
 
-    <section class="intro-section">
+    <!-- Satu card utama -->
+    <article class="article-card">
       <h1>{{ event.judul }}</h1>
 
+      <!-- Deskripsi langsung di bawah judul -->
+      <div class="event-description">
+        <p>{{ event.deskripsi }}</p>
+        <p *ngIf="event.catatan">{{ event.catatan }}</p>
+      </div>
+
+      <!-- Informasi tanggal dan lokasi -->
       <div class="event-info-list">
         <div class="event-info-item">
-          <div class="info-icon">
-            <ion-icon name="calendar-outline"></ion-icon>
-          </div>
-
+          <ion-icon name="calendar-outline"></ion-icon>
           <div>
             <strong>{{ event.tanggal }}</strong>
             <span>{{ event.jam }}</span>
@@ -44,83 +45,68 @@
         </div>
 
         <div class="event-info-item">
-          <div class="info-icon">
-            <ion-icon name="location-outline"></ion-icon>
-          </div>
-
+          <ion-icon name="location-outline"></ion-icon>
           <div>
             <strong>{{ event.lokasi }}</strong>
             <span>{{ event.alamat }}</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="info-card">
-      <div class="card-title">
-        <div class="title-icon">
-          <ion-icon name="information-circle-outline"></ion-icon>
-        </div>
-
-        <h2>Deskripsi Event</h2>
-      </div>
-
-      <p>{{ event.deskripsi }}</p>
-
-      <p>{{ event.catatan }}</p>
-    </section>
-
-    <section class="info-card">
-      <div class="card-title">
-        <div class="title-icon">
+      <!-- Rundown -->
+      <section class="rundown-section">
+        <div class="section-heading">
           <ion-icon name="time-outline"></ion-icon>
+          <h2>Rundown Acara</h2>
         </div>
 
-        <h2>Rundown Acara</h2>
-      </div>
+        <p *ngIf="event.rundown.length === 0" class="empty-rundown">
+          Rundown kegiatan belum tersedia.
+        </p>
 
-      <div class="timeline">
-        <div
-          class="timeline-item"
-          *ngFor="let item of event.rundown; let last = last"
+        <div class="timeline" *ngIf="event.rundown.length > 0">
+          <div
+            class="timeline-item"
+            *ngFor="let item of event.rundown; let last = last"
+          >
+            <div class="timeline-marker">
+              <span class="timeline-dot"></span>
+              <span class="timeline-line" *ngIf="!last"></span>
+            </div>
+
+            <div class="timeline-content">
+              <strong>{{ item.waktu }}</strong>
+              <p>{{ item.kegiatan }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lokasi -->
+      <section class="location-section">
+        <h2>Lokasi Event</h2>
+        <p>Lihat lokasi kegiatan melalui Google Maps.</p>
+
+        <ion-button
+          expand="block"
+          shape="round"
+          color="primary"
+          class="location-button"
+          (click)="lihatLokasi()"
         >
-          <div class="timeline-marker">
-            <span class="timeline-dot"></span>
-
-            <span class="timeline-line" *ngIf="!last"></span>
-          </div>
-
-          <div class="timeline-content">
-            <strong> {{ item.waktu }} </strong>
-
-            <p>{{ item.kegiatan }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="location-section">
-      <div class="section-title">
-        <div>
-          <h2>Lokasi Event</h2>
-
-          <p>Lihat lokasi acara di Google Maps.</p>
-        </div>
-      </div>
-
-      <ion-button
-        expand="block"
-        shape="round"
-        color="primary"
-        class="location-button"
-        (click)="lihatLokasi()"
-      >
-        <ion-icon slot="start" name="map-outline"></ion-icon>
-
-        Lihat Lokasi
-      </ion-button>
-    </section>
+          <ion-icon slot="start" name="map-outline"></ion-icon>
+          Lihat Lokasi
+        </ion-button>
+      </section>
+    </article>
 
     <div class="bottom-space"></div>
   </main>
+
+  <ng-template #kosong>
+    <main class="page-container">
+      <p>Event tidak ditemukan.</p>
+      <ion-button (click)="goBack()">Kembali</ion-button>
+    </main>
+  </ng-template>
 </ion-content>

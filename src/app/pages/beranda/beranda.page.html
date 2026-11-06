@@ -1,62 +1,67 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <div class="page-container header-inner">
-      <div class="brand">
-        <img
-          src="assets/icon/logo.png"
-          alt="Titik Nol Trawas"
-          class="brand-logo"
-        />
-
-        <span class="brand-name">Titik Nol Trawas</span>
-      </div>
+    <div class="app-brand">
+      <img src="assets/icon/logo.png" alt="" />
+      <span>Titik Nol Trawas</span>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="beranda-content" [fullscreen]="true">
+<ion-content class="beranda-content">
   <main class="page-container">
-    <div class="search-wrapper">
-      <ion-searchbar
-        mode="ios"
-        placeholder="Cari tempat wisata..."
-        class="custom-search"
-        [showClearButton]="'never'"
-      ></ion-searchbar>
-    </div>
+    <section
+      class="hero-section"
+      aria-label="Pilihan tempat sekitar Titik Nol Trawas"
+    >
+      <div class="hero-slider" #bannerSlider (scroll)="onBannerScroll($event)">
+        <div class="hero-card" *ngFor="let banner of bannerList">
+          <a
+            class="hero-link"
+            [routerLink]="banner.link"
+            [attr.aria-label]="banner.judul"
+          >
+            <img class="hero-image" [src]="banner.gambar" alt="" />
+            <div class="hero-overlay"></div>
 
-    <section class="hero-section">
-      <div class="hero-card" routerLink="/tabs/wisata">
-        <img
-          src="assets/images/banner/banner-trawas.jpg"
-          alt="Pesona Alam Trawas"
-          class="hero-image"
-        />
+            <div class="hero-content" [class.cover-content]="banner.cover">
+              <span class="hero-badge" *ngIf="!banner.cover">
+                {{ banner.kategori }}
+              </span>
+              <h2>{{ banner.judul }}</h2>
+              <p>{{ banner.deskripsi }}</p>
+            </div>
+          </a>
 
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-          <span class="hero-badge"> Destinasi Terbaru </span>
-
-          <h1>Pesona Alam Trawas</h1>
-
-          <p>Jelajahi keindahan alam Trawas</p>
+          <button
+            *ngIf="banner.cover"
+            type="button"
+            class="hero-next"
+            aria-label="Lihat tempat berikutnya"
+            (click)="bannerBerikutnya(bannerSlider)"
+          >
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
         </div>
-
-        <div class="hero-dots">
-          <span class="active"></span>
+      </div>
+      <div class="hero-dots" aria-label="Pilih banner">
+        <button
+          type="button"
+          *ngFor="let banner of bannerList; let i = index"
+          [class.active]="bannerAktif === i"
+          [attr.aria-label]="'Lihat banner ' + (i + 1)"
+          [attr.aria-current]="bannerAktif === i ? 'true' : null"
+          (click)="pilihBanner(i, bannerSlider)"
+        >
           <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        </button>
       </div>
     </section>
 
     <section class="content-section">
       <div class="section-header">
-        <h2>Berita Terbaru</h2>
+        <h2>Berita Terkini</h2>
 
-        <a routerLink="/daftar-berita" class="see-all"> Lihat Semua </a>
+        <a routerLink="/tabs/berita" class="see-all"> Lihat Semua </a>
       </div>
 
       <div class="news-list">
@@ -80,11 +85,12 @@
 
     <section class="content-section">
       <div class="section-header">
-        <h2>Event Terdekat</h2>
+        <h2>Event Mendatang</h2>
 
         <a routerLink="/tabs/event" class="see-all"> Lihat Semua </a>
       </div>
 
+      <p *ngIf="eventTerdekat.length === 0">Belum ada event.</p>
       <div class="horizontal-list">
         <article class="event-card" *ngFor="let event of eventTerdekat">
           <div class="event-image-wrapper">
@@ -120,7 +126,8 @@
 
     <section class="content-section">
       <div class="section-header">
-        <h2>Destinasi Populer</h2>
+        <h2>Wisata Titik Nol Trawas</h2>
+        <a routerLink="/tabs/wisata" class="see-all">Lihat Semua</a>
       </div>
 
       <div class="horizontal-list">
@@ -131,21 +138,13 @@
               [alt]="dest.nama"
               class="destination-image"
             />
-
-            <button
-              type="button"
-              class="favorite-button"
-              (click)="$event.stopPropagation()"
-            >
-              <ion-icon name="heart-outline"></ion-icon>
-            </button>
           </div>
 
           <div class="destination-content">
             <div class="destination-title-row">
               <h3>{{ dest.nama }}</h3>
 
-              <span class="rating">
+              <span class="rating" *ngIf="dest.rating !== null">
                 <ion-icon name="star"></ion-icon>
                 {{ dest.rating }}
               </span>
@@ -167,7 +166,7 @@
     </section>
 
     <section class="content-section">
-      <div class="virtual-tour-card" routerLink="/tabs/virtual-tour">
+      <div class="virtual-tour-card">
         <img
           src="assets/images/virtual-tour/virtual-tour-bg.jpg"
           alt="Virtual Tour Trawas"
@@ -182,9 +181,9 @@
             VIRTUAL TOUR 360°
           </span>
 
-          <h2>Jelajahi Trawas dari Rumah</h2>
+          <h2>Jelajahi Titik Nol Trawas</h2>
 
-          <p>Rasakan pengalaman menjelajahi keindahan Trawas secara virtual.</p>
+          <p>Lihat suasana kawasan Titik Nol Trawas secara virtual.</p>
 
           <ion-button
             shape="round"

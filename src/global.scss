@@ -10,33 +10,6 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-:root {
-  --tn-green: #0d631b;
-  --tn-green-dark: #095315;
-  --tn-green-light: #eef6ef;
-
-  --tn-background: #f7f9f6;
-  --tn-surface: #ffffff;
-
-  --tn-text: #20231f;
-  --tn-text-secondary: #626861;
-  --tn-text-light: #8a9089;
-
-  --tn-border: #dfe3df;
-
-  --tn-radius-sm: 8px;
-  --tn-radius-md: 12px;
-  --tn-radius-lg: 16px;
-
-  --tn-page-padding: 16px;
-  --tn-section-gap: 20px;
-
-  --ion-color-primary: #0d631b;
-  --ion-color-primary-rgb: 13, 99, 27;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-}
-
 html,
 body {
   margin: 0;
@@ -46,15 +19,9 @@ body {
 }
 
 body {
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+  font-family: var(--ion-font-family);
+  font-size: var(--tn-font-body);
+  line-height: 1.5;
 
   background: var(--tn-background);
   color: var(--tn-text);
@@ -70,11 +37,6 @@ ion-content {
   --background: var(--tn-background);
 }
 
-ion-toolbar {
-  --background: var(--tn-surface);
-  --color: var(--tn-text);
-}
-
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -84,11 +46,88 @@ a {
   box-sizing: border-box;
 }
 
-ion-tabs ion-content {
-  --padding-bottom: 88px;
+ion-toolbar {
+  --background: var(--tn-surface);
+  --color: var(--tn-green);
+  --min-height: 56px;
+}
+ion-title {
+  font-size: var(--tn-font-card);
+  font-weight: 700;
 }
 
-ion-tabs ion-content::part(scroll) {
-  padding-bottom: 88px;
-  box-sizing: border-box;
+ion-content {
+  --color: var(--tn-text);
+  --padding-bottom: 24px;
+}
+
+ion-button {
+  font-family: inherit;
+  font-size: var(--tn-font-small);
+  text-transform: none;
+  --box-shadow: none;
+}
+
+ion-searchbar {
+  --background: var(--tn-surface);
+  --color: var(--tn-text);
+  --placeholder-color: var(--tn-text-secondary);
+  --icon-color: var(--tn-text-secondary);
+  --box-shadow: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--tn-green);
+  outline-offset: 3px;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  max-width: 680px;
+  margin: auto;
+  padding: 0 16px;
+  color: var(--tn-green);
+  font-size: var(--tn-font-card);
+  font-weight: 700;
+}
+
+.app-brand img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.empty-message {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--tn-text-secondary);
+}
+
+/* Searchbar untuk halaman Wisata, Event, dan Berita */
+
+app-wisata ion-searchbar.custom-search .searchbar-input,
+app-event ion-searchbar.custom-search .searchbar-input,
+app-berita ion-searchbar.custom-search .searchbar-input {
+  padding-inline-start: 48px !important;
+  padding-inline-end: 44px !important;
+  font-size: 14px;
+}
+
+app-wisata ion-searchbar.custom-search .searchbar-search-icon,
+app-event ion-searchbar.custom-search .searchbar-search-icon,
+app-berita ion-searchbar.custom-search .searchbar-search-icon {
+  inset-inline-start: 16px !important;
+  width: 20px;
+  margin-inline-start: 0 !important;
 }

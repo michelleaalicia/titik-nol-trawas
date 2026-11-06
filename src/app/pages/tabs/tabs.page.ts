@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   IonTabs,
-  IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonIcon,
@@ -12,6 +11,7 @@ import {
   home,
   mapOutline,
   calendarOutline,
+  newspaperOutline,
   scanOutline,
   informationCircleOutline,
 } from 'ionicons/icons';
@@ -21,7 +21,6 @@ import {
   standalone: true,
   imports: [
     IonTabs,
-    IonRouterOutlet,
     IonTabBar,
     IonTabButton,
     IonIcon,
@@ -36,6 +35,7 @@ export class TabsPage {
       home,
       mapOutline,
       calendarOutline,
+      newspaperOutline,
       scanOutline,
       informationCircleOutline,
     });
