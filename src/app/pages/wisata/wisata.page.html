@@ -11,10 +11,9 @@
   <main class="page-container">
     <header class="page-header">
       <h1>Temukan Wisata</h1>
-      <p>Temukan tempat di sekitar Titik Nol Trawas, Desa Duyung.</p>
+      <p>Temukan tempat di sekitar Titik Nol Trawas.</p>
     </header>
 
-    <!-- Pencarian -->
     <ion-searchbar
       class="custom-search"
       mode="ios"
@@ -27,7 +26,6 @@
       (ionClear)="searchTerm = ''"
     ></ion-searchbar>
 
-    <!-- Tiga tombol filter -->
     <div class="filter-row" aria-label="Filter wisata">
       <button
         type="button"
@@ -63,7 +61,6 @@
       </button>
     </div>
 
-    <!-- Ringkasan filter aktif -->
     <div class="active-filters" *ngIf="adaFilter">
       <span *ngIf="selectedKategori !== 'Semua'"> {{ selectedKategori }} </span>
 
@@ -74,7 +71,6 @@
       <button type="button" (click)="resetFilter()">Reset filter</button>
     </div>
 
-    <!-- Jumlah hasil -->
     <div class="result-header">
       <h2>Destinasi Wisata</h2>
 
@@ -83,7 +79,6 @@
       </span>
     </div>
 
-    <!-- Hasil kosong -->
     <div class="empty-state" *ngIf="destinasiFiltered.length === 0">
       <ion-icon name="location-outline"></ion-icon>
 
@@ -95,7 +90,6 @@
       </ion-button>
     </div>
 
-    <!-- Kartu wisata -->
     <div class="destination-list">
       <article class="destination-card" *ngFor="let dest of destinasiFiltered">
         <a
@@ -107,25 +101,30 @@
 
           <span class="category-badge"> {{ dest.kategori }} </span>
 
-          <span class="rating-badge" *ngIf="dest.rating !== null">
-            <ion-icon name="star"></ion-icon>
-            {{ dest.rating }}
+          <span class="status-badge" [class.free]="dest.harga === 0">
+            <ng-container *ngIf="dest.harga > 0; else gratisLabel">
+              <ion-icon name="pricetag-outline"></ion-icon>
+              {{ formatHarga(dest.harga) }}
+            </ng-container>
+
+            <ng-template #gratisLabel>Gratis</ng-template>
           </span>
         </a>
 
         <div class="destination-body">
           <h3>{{ dest.nama }}</h3>
+
           <p>{{ dest.deskripsi }}</p>
 
           <div class="destination-meta">
             <span>
-              <ion-icon name="pricetag-outline"></ion-icon>
-              {{ dest.harga }}
+              <ion-icon name="time-outline"></ion-icon>
+              {{ dest.jam }}
             </span>
 
             <span>
-              <ion-icon name="time-outline"></ion-icon>
-              {{ dest.jam }}
+              <ion-icon name="location-outline"></ion-icon>
+              {{ dest.alamat }}
             </span>
           </div>
 
@@ -143,7 +142,6 @@
   </main>
 </ion-content>
 
-<!-- Panel pilihan dari bawah -->
 <ion-modal
   class="filter-modal"
   [isOpen]="panelTerbuka"
@@ -174,7 +172,6 @@
         </button>
       </div>
 
-      <!-- Pilihan kategori -->
       <div class="sheet-options" *ngIf="jenisFilter === 'kategori'">
         <button
           type="button"
@@ -195,7 +192,6 @@
         </button>
       </div>
 
-      <!-- Pilihan harga -->
       <div class="sheet-options" *ngIf="jenisFilter === 'harga'">
         <button
           type="button"
@@ -214,7 +210,6 @@
         </button>
       </div>
 
-      <!-- Pilihan jam -->
       <div class="sheet-options" *ngIf="jenisFilter === 'jam'">
         <button
           type="button"

@@ -108,14 +108,6 @@ button:focus-visible {
   object-fit: contain;
 }
 
-.empty-message {
-  padding: 24px 0;
-  text-align: center;
-  color: var(--tn-text-secondary);
-}
-
-/* Searchbar untuk halaman Wisata, Event, dan Berita */
-
 app-wisata ion-searchbar.custom-search .searchbar-input,
 app-event ion-searchbar.custom-search .searchbar-input,
 app-berita ion-searchbar.custom-search .searchbar-input {
@@ -130,4 +122,10 @@ app-berita ion-searchbar.custom-search .searchbar-search-icon {
   inset-inline-start: 16px !important;
   width: 20px;
   margin-inline-start: 0 !important;
+}
+
+.empty-message {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--tn-text-secondary);
 }

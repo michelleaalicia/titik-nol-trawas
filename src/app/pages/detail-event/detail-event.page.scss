@@ -11,10 +11,8 @@
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
-  padding: 0 var(--tn-page-padding) 24px;
+  padding: 24px 16px 24px;
 }
-
-/* Header */
 
 .detail-header {
   height: 56px;
@@ -57,8 +55,6 @@
   height: 40px;
 }
 
-/* Gambar */
-
 .hero-image-wrapper {
   position: relative;
   width: 100%;
@@ -73,8 +69,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* Satu card utama, mengikuti Detail Berita */
 
 .article-card {
   margin-top: 20px;
@@ -96,8 +90,6 @@
   font-weight: 700;
 }
 
-/* Deskripsi */
-
 .event-description {
   display: flex;
   flex-direction: column;
@@ -110,8 +102,6 @@
   font-size: var(--tn-font-card);
   line-height: 1.625;
 }
-
-/* Tanggal dan lokasi */
 
 .event-info-list {
   display: flex;
@@ -149,8 +139,6 @@
   font-size: var(--tn-font-body);
   line-height: 1.5;
 }
-
-/* Rundown */
 
 .rundown-section {
   display: flex;
@@ -240,8 +228,6 @@
   line-height: 1.5;
 }
 
-/* Lokasi */
-
 .location-section {
   padding-top: 16px;
   border-top: 1px solid var(--tn-border);
@@ -273,11 +259,6 @@
   height: 12px;
 }
 
-.header-spacer {
-  width: 40px;
-  height: 40px;
-}
-
 .detail-event-header {
   --background: var(--tn-background);
   background: var(--tn-background);
@@ -290,7 +271,7 @@
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
-  padding: 0 var(--tn-page-padding);
+  padding: 0 16px;
 
   display: flex;
   align-items: center;

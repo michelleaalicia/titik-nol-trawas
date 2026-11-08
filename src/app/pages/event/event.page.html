@@ -14,7 +14,6 @@
       <p>Temukan kegiatan di sekitar Titik Nol Trawas.</p>
     </header>
 
-    <!-- Pencarian -->
     <ion-searchbar
       class="custom-search"
       mode="ios"
@@ -27,7 +26,6 @@
       (ionClear)="searchTerm = ''"
     ></ion-searchbar>
 
-    <!-- Tombol filter -->
     <div class="filter-row" aria-label="Filter event">
       <button
         type="button"
@@ -63,7 +61,6 @@
       </button>
     </div>
 
-    <!-- Filter aktif -->
     <div class="active-filters" *ngIf="adaFilter">
       <span *ngIf="selectedKategori !== 'semua'"> {{ selectedKategori }} </span>
 
@@ -74,7 +71,6 @@
       <button type="button" (click)="resetFilter()">Reset filter</button>
     </div>
 
-    <!-- Jumlah hasil -->
     <div class="result-header">
       <h2>Daftar Event</h2>
 
@@ -83,7 +79,6 @@
       </span>
     </div>
 
-    <!-- Hasil kosong -->
     <div class="empty-state" *ngIf="filteredEvents.length === 0">
       <ion-icon name="calendar-outline"></ion-icon>
 
@@ -95,7 +90,6 @@
       </ion-button>
     </div>
 
-    <!-- Daftar kartu -->
     <div class="event-list">
       <article class="event-card" *ngFor="let event of filteredEvents">
         <a
@@ -105,10 +99,8 @@
         >
           <img [src]="event.gambar" [alt]="event.judul" loading="lazy" />
 
-          <!-- KATEGORI: kiri atas -->
           <span class="category-badge"> {{ event.kategori }} </span>
 
-          <!-- HARGA: kanan atas -->
           <span class="status-badge" [class.free]="event.harga === 0">
             <ng-container *ngIf="event.harga > 0; else gratisLabel">
               <ion-icon name="pricetag-outline"></ion-icon>
@@ -148,7 +140,6 @@
       </article>
     </div>
 
-    <!-- Panel pilihan filter -->
     <ion-modal
       class="filter-modal"
       [isOpen]="panelTerbuka"

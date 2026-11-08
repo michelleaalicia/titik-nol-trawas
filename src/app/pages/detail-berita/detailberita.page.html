@@ -19,15 +19,14 @@
 
 <ion-content class="detail-berita-content">
   <div class="main-wrap">
-    <!-- Cover Image -->
+    
     <div class="cover-wrap">
       <img [src]="berita.cover" [alt]="berita.judul" class="cover-image" />
       <div class="cover-gradient"></div>
     </div>
 
-    <!-- Article Header + Body -->
     <div class="article-card">
-      <!-- Meta -->
+      
       <div class="meta-row">
         <span class="kategori-chip">{{ berita.kategori }}</span>
         <div class="tanggal">
@@ -36,10 +35,8 @@
         </div>
       </div>
 
-      <!-- Judul -->
       <h1>{{ berita.judul }}</h1>
 
-      <!-- Author -->
       <div class="author-row">
         <div class="avatar">{{ berita.penulisInisial }}</div>
         <div class="author-info">
@@ -48,7 +45,6 @@
         </div>
       </div>
 
-      <!-- Body Content -->
       <div class="article-body">
         <p>{{ berita.paragraf1 }}</p>
 

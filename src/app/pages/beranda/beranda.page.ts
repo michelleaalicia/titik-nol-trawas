@@ -14,19 +14,7 @@ import {
 
 import { addIcons } from 'ionicons';
 
-import {
-  home,
-  mapOutline,
-  calendarOutline,
-  compassOutline,
-  informationCircleOutline,
-  locationOutline,
-  heartOutline,
-  star,
-  cameraOutline,
-  searchOutline,
-  arrowForwardOutline,
-} from 'ionicons/icons';
+import { locationOutline, cameraOutline, arrowForwardOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-beranda',
@@ -90,18 +78,14 @@ export class BerandaPage {
 
   destinasiPopuler = DATA_WISATA.slice(0, 3);
 
+  formatHarga(harga: number): string {
+    return 'Rp' + harga.toLocaleString('id-ID');
+  }
+
   constructor() {
     addIcons({
-      home,
-      'map-outline': mapOutline,
-      'calendar-outline': calendarOutline,
-      'compass-outline': compassOutline,
-      'information-circle-outline': informationCircleOutline,
       'location-outline': locationOutline,
-      'heart-outline': heartOutline,
-      star,
       'camera-outline': cameraOutline,
-      'search-outline': searchOutline,
       'arrow-forward-outline': arrowForwardOutline,
     });
   }

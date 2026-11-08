@@ -143,14 +143,9 @@
           <div class="destination-content">
             <div class="destination-title-row">
               <h3>{{ dest.nama }}</h3>
-
-              <span class="rating" *ngIf="dest.rating !== null">
-                <ion-icon name="star"></ion-icon>
-                {{ dest.rating }}
-              </span>
             </div>
 
-            <p class="price">{{ dest.harga }}</p>
+            <p class="price">{{ formatHarga(dest.harga) }}</p>
 
             <ion-button
               expand="block"

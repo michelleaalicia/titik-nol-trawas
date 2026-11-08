@@ -28,8 +28,6 @@
   line-height: 1.5;
 }
 
-/* Pencarian */
-
 .custom-search {
   --background: var(--tn-surface);
   --border-radius: 14px;
@@ -41,8 +39,6 @@
   padding: 0;
   min-height: 48px;
 }
-
-/* Tombol filter */
 
 .filter-row {
   display: grid;
@@ -83,8 +79,6 @@
   color: var(--tn-green);
 }
 
-/* Ringkasan filter aktif */
-
 .active-filters {
   display: flex;
   flex-wrap: wrap;
@@ -114,8 +108,6 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* Daftar wisata */
 
 .result-header {
   margin: 24px 0 14px;
@@ -159,11 +151,16 @@
 }
 
 .category-badge,
-.rating-badge {
+.status-badge {
   position: absolute;
   top: 12px;
+  z-index: 2;
 
-  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 7px 10px;
   border-radius: 8px;
 
   font-size: var(--tn-font-small);
@@ -176,15 +173,17 @@
   color: #fff;
 }
 
-.rating-badge {
+.status-badge {
   right: 12px;
-  background: var(--tn-surface);
-  color: var(--tn-text);
+  background: #ffffff;
+  color: #333333;
+  font-weight: 400;
 }
 
-.rating-badge ion-icon {
-  color: var(--tn-star);
-  vertical-align: -1px;
+.status-badge ion-icon {
+  flex-shrink: 0;
+  color: #c28b00;
+  font-size: 12px;
 }
 
 .destination-body {
@@ -195,6 +194,7 @@
   margin: 0;
   color: var(--tn-text);
   font-size: var(--tn-font-card);
+  font-weight: 600;
 }
 
 .destination-body p {
@@ -206,21 +206,24 @@
 
 .destination-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 14px;
 }
 
 .destination-meta span {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 7px;
+
   color: var(--tn-text-secondary);
   font-size: var(--tn-font-small);
+  line-height: 1.5;
 }
 
 .destination-meta ion-icon {
   flex-shrink: 0;
+  margin-top: 2px;
   color: var(--tn-green);
 }
 
@@ -231,8 +234,6 @@
   margin: 0;
   font-weight: 600;
 }
-
-/* Hasil kosong */
 
 .empty-state {
   padding: 40px 16px;
@@ -291,8 +292,7 @@
   font-weight: 700;
 }
 
-.sheet-header p,
-.sheet-note {
+.sheet-header p {
   margin: 6px 0 0;
   color: var(--tn-text-secondary);
   font-size: var(--tn-font-small);
@@ -363,10 +363,6 @@
   color: var(--tn-text-secondary);
   font-size: var(--tn-font-small);
   font-weight: 400;
-}
-
-.sheet-note {
-  margin-top: 16px;
 }
 
 button:focus-visible {

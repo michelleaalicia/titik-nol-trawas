@@ -17,24 +17,21 @@
 
 <ion-content class="detail-event-content">
   <main class="page-container" *ngIf="event; else kosong">
-    <!-- Gambar event -->
+    
     <section class="hero-section">
       <div class="hero-image-wrapper">
         <img [src]="event.gambar" [alt]="event.judul" class="hero-image" />
       </div>
     </section>
 
-    <!-- Satu card utama -->
     <article class="article-card">
       <h1>{{ event.judul }}</h1>
 
-      <!-- Deskripsi langsung di bawah judul -->
       <div class="event-description">
         <p>{{ event.deskripsi }}</p>
         <p *ngIf="event.catatan">{{ event.catatan }}</p>
       </div>
 
-      <!-- Informasi tanggal dan lokasi -->
       <div class="event-info-list">
         <div class="event-info-item">
           <ion-icon name="calendar-outline"></ion-icon>
@@ -53,7 +50,6 @@
         </div>
       </div>
 
-      <!-- Rundown -->
       <section class="rundown-section">
         <div class="section-heading">
           <ion-icon name="time-outline"></ion-icon>
@@ -82,7 +78,6 @@
         </div>
       </section>
 
-      <!-- Lokasi -->
       <section class="location-section">
         <h2>Lokasi Event</h2>
         <p>Lihat lokasi kegiatan melalui Google Maps.</p>

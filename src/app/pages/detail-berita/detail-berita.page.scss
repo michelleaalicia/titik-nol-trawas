@@ -163,17 +163,10 @@ blockquote {
 }
 
 .detail-berita-header {
-  background: var(--tn-surface);
+  background: var(--tn-background);
+  --background: var(--tn-background);
   box-shadow: none;
   z-index: 100;
-}
-
-.detail-berita-header ion-toolbar {
-  --background: var(--tn-surface);
-  --min-height: 56px;
-  --padding-start: 0;
-  --padding-end: 0;
-  --border-width: 0;
 }
 
 .detail-berita-header .detail-header {

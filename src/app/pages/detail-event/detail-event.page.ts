@@ -11,12 +11,8 @@ import {
   arrowBack,
   calendarOutline,
   locationOutline,
-  informationCircleOutline,
   timeOutline,
   mapOutline,
-  musicalNotesOutline,
-  leafOutline,
-  restaurantOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -29,8 +25,6 @@ import {
 export class DetailEventPage {
   event: any;
 
-  eventList = DATA_EVENT;
-
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -39,28 +33,20 @@ export class DetailEventPage {
       'arrow-back': arrowBack,
       'calendar-outline': calendarOutline,
       'location-outline': locationOutline,
-      'information-circle-outline': informationCircleOutline,
       'time-outline': timeOutline,
       'map-outline': mapOutline,
-      'musical-notes-outline': musicalNotesOutline,
-      'leaf-outline': leafOutline,
-      'restaurant-outline': restaurantOutline,
     });
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.event = this.eventList.find((item) => item.id === id);
+    this.event = DATA_EVENT.find((item) => item.id === id);
   }
 
-  goBack() {
+  goBack(): void {
     this.location.back();
   }
 
-  formatHarga(harga: number) {
-    return 'Rp' + harga.toLocaleString('id-ID');
-  }
-
-  lihatLokasi() {
+  lihatLokasi(): void {
     if (!this.event) return;
     const titik = this.event.latitude + ',' + this.event.longitude;
     window.open(

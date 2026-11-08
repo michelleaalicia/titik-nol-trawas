@@ -1,5 +1,3 @@
-// Data berita dan event untuk Titik Nol Trawas.
-
 export const DATA_BERITA = [
   {
     id: 1,
@@ -193,8 +191,6 @@ export const DATA_BERITA = [
   },
 ];
 
-// Data contoh event untuk kebutuhan tampilan aplikasi.
-
 export const DATA_EVENT = [
   {
     id: 1,
@@ -211,7 +207,6 @@ export const DATA_EVENT = [
     gambar: 'assets/images/event/trawas-kuliner-fest.jpg',
     latitude: -7.647420433538123,
     longitude: 112.60773553835841,
-    icon: 'restaurant-outline',
     deskripsi:
       'Trawas Kuliner Fest menghadirkan beragam pilihan kuliner Nusantara dan produk UMKM lokal di kawasan Titik Nol Trawas. Pengunjung dapat menikmati sajian khas daerah sambil merasakan suasana alam pegunungan dan persawahan Desa Duyung.',
     catatan:
@@ -237,7 +232,6 @@ export const DATA_EVENT = [
     gambar: 'assets/images/event/sedekah-bumi-dusun-lebak.jpg',
     latitude: -7.646218856426906,
     longitude: 112.6112975117526,
-    icon: 'leaf-outline',
     deskripsi:
       'Sedekah Bumi Dusun Lebak merupakan kegiatan tradisi masyarakat sebagai ungkapan rasa syukur atas hasil bumi dan berkah yang diperoleh. Kegiatan ini menjadi bagian dari upaya melestarikan budaya serta mempererat kebersamaan warga.',
     catatan:
@@ -263,7 +257,6 @@ export const DATA_EVENT = [
     gambar: 'assets/images/event/mmd-sosialisasi-ispa.jpg',
     latitude: -7.647244790473612,
     longitude: 112.61012226757515,
-    icon: 'leaf-outline',
     deskripsi:
       'Musyawarah Masyarakat Desa dan Sosialisasi ISPA menjadi wadah bagi warga untuk menyampaikan kebutuhan kesehatan lingkungan sekaligus memperoleh informasi mengenai infeksi saluran pernapasan akut. Kegiatan ini mendorong peningkatan kesadaran masyarakat terhadap pentingnya menjaga kesehatan.',
     catatan:
@@ -289,7 +282,6 @@ export const DATA_EVENT = [
     gambar: 'assets/images/event/bersih-desa.jpg',
     latitude: -7.6481057577627976,
     longitude: 112.60841593873901,
-    icon: 'trash-outline',
     deskripsi:
       'Kegiatan Bersih Desa mengajak masyarakat untuk menjaga kebersihan lingkungan, jalan, dan kawasan wisata Titik Nol Trawas. Melalui semangat gotong royong, warga bersama-sama menciptakan lingkungan Desa Duyung yang bersih, nyaman, dan asri.',
     catatan:
@@ -315,7 +307,6 @@ export const DATA_EVENT = [
     gambar: 'assets/images/event/trawas-trashion-carnival.jpg',
     latitude: -7.6446416237045725,
     longitude: 112.60588222532556,
-    icon: 'musical-notes-outline',
     deskripsi:
       'Trawas Trashion Carnival menampilkan kreativitas masyarakat melalui parade busana unik yang memanfaatkan bahan daur ulang. Acara ini memadukan seni, budaya, dan kepedulian lingkungan dalam sebuah pertunjukan yang menarik di kawasan Titik Nol Trawas.',
     catatan:

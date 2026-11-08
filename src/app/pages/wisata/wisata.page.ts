@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
 import {
   IonHeader,
   IonToolbar,
@@ -11,11 +10,8 @@ import {
   IonIcon,
   IonModal,
 } from '@ionic/angular';
-
 import { addIcons } from 'ionicons';
-
 import {
-  star,
   pricetagOutline,
   timeOutline,
   locationOutline,
@@ -24,123 +20,97 @@ import {
   checkmarkCircle,
 } from 'ionicons/icons';
 
-// Data bersama daftar, detail, dan beranda. Foto ditambahkan sendiri di assets.
-// Rating null berarti belum terverifikasi; harga null bukan berarti gratis.
 export interface DataWisata {
   id: number;
   nama: string;
   kategori: string;
-  rating: number | null;
   deskripsi: string;
-  harga: string;
-  hargaAngka: number | null;
+  harga: number;
   jam: string;
-  jamBuka: string | null;
-  jamTutup: string | null;
-  buka24Jam: boolean;
+  jamBuka: string;
+  jamTutup: string;
   alamat: string;
   gambar: string;
   latitude: number;
   longitude: number;
-  sumber: string;
-  catatan?: string;
 }
 
 export const DATA_WISATA: DataWisata[] = [
   {
-    "rating": null,
-    "hargaAngka": null,
-    "jamBuka": null,
-    "jamTutup": null,
-    "buka24Jam": false,
-    "id": 1,
-    "nama": "dCabin Jati Trawas",
-    "kategori": "Lainnya",
-    "deskripsi": "Tempat di sekitar Titik Nol Trawas, Desa Duyung. Informasi layanan dan deskripsi lengkap sedang dilengkapi.",
-    "harga": "Biaya belum tersedia",
-    "jam": "Jam buka belum tersedia",
-    "alamat": "Sekitar Desa Duyung, Kecamatan Trawas, Kabupaten Mojokerto, Jawa Timur. Ikuti titik lokasi pada peta.",
-    "gambar": "assets/images/wisata/dcabin-jati-trawas.jpg",
-    "latitude": -7.6481057577627976,
-    "longitude": 112.60841593873901,
-    "sumber": "Nama dan koordinat dari pemilik aplikasi; rincian tempat belum terverifikasi."
+    id: 1,
+    nama: 'dCabin Jati Trawas',
+    kategori: 'Penginapan',
+    deskripsi:
+      'Penginapan bernuansa alam di kawasan Desa Duyung, Trawas. Tempat ini cocok untuk beristirahat bersama keluarga atau teman sambil menikmati suasana sejuk dan pemandangan alam pegunungan.',
+    harga: 500000,
+    jam: 'Check-in 14.00 WIB · Check-out 12.00 WIB',
+    jamBuka: '08:00',
+    jamTutup: '22:00',
+    alamat: 'Titik Nol Trawas, Desa Duyung, Kecamatan Trawas.',
+    gambar: 'assets/images/wisata/dcabin-jati-trawas.jpg',
+    latitude: -7.6481057577627976,
+    longitude: 112.60841593873901,
   },
   {
-    "rating": null,
-    "hargaAngka": 25000,
-    "jamBuka": null,
-    "jamTutup": null,
-    "buka24Jam": false,
-    "id": 2,
-    "nama": "Elok Cafe",
-    "kategori": "Kuliner",
-    "deskripsi": "Kafe di area persawahan Desa Duyung untuk menikmati makanan dan minuman sambil bersantai. Perkiraan pengeluaran mengikuti pesanan, bukan harga tiket masuk.",
-    "harga": "Perkiraan Rp25.000 - Rp50.000 / orang",
-    "jam": "Konfirmasi jam buka ke pengelola",
-    "alamat": "Desa Duyung, Kecamatan Trawas, Kabupaten Mojokerto, Jawa Timur.",
-    "gambar": "assets/images/wisata/elok-cafe.jpg",
-    "latitude": -7.647244790473612,
-    "longitude": 112.61012226757515,
-    "sumber": "https://restaurantguru.com/Elok-Cafe-Indonesia",
-    "catatan": "Jam berbeda antarsumber sehingga tidak digunakan pada filter waktu. Filter harga memakai batas bawah perkiraan pengeluaran."
+    id: 2,
+    nama: 'Elok Cafe',
+    kategori: 'Kuliner',
+    deskripsi:
+      'Kafe di kawasan persawahan Desa Duyung yang menawarkan suasana pedesaan dan pemandangan alam Trawas. Pengunjung dapat menikmati aneka makanan dan minuman sambil bersantai bersama keluarga atau teman.',
+    harga: 20000,
+    jam: 'Senin - Jumat 09.00 - 18.00 WIB · Sabtu - Minggu 08.00 - 20.00 WIB',
+    jamBuka: '09:00',
+    jamTutup: '18:00',
+    alamat: 'Titik Nol Trawas, Desa Duyung, Kecamatan Trawas.',
+    gambar: 'assets/images/wisata/elok-cafe.jpg',
+    latitude: -7.647244790473612,
+    longitude: 112.61012226757515,
   },
   {
-    "rating": null,
-    "hargaAngka": null,
-    "jamBuka": null,
-    "jamTutup": null,
-    "buka24Jam": false,
-    "id": 3,
-    "nama": "Durian DUREN DEWA",
-    "kategori": "Kuliner",
-    "deskripsi": "Tempat penjualan durian di Desa Duyung, Trawas. Pilihan buah dan biaya pembelian perlu ditanyakan langsung kepada penjual.",
-    "harga": "Harga mengikuti pilihan durian",
-    "jam": "Konfirmasi jam buka ke penjual",
-    "alamat": "Desa Duyung, Kecamatan Trawas, Kabupaten Mojokerto, Jawa Timur.",
-    "gambar": "assets/images/wisata/durian-duren-dewa.jpg",
-    "latitude": -7.646218856426906,
-    "longitude": 112.6112975117526,
-    "sumber": "https://www.semuabis.com/durian-duren-dewa-0822-3343-0770",
-    "catatan": "Direktori menyebut 24 jam, tetapi belum dikonfirmasi oleh pengelola; bukan otomatis buka 24 jam."
+    id: 3,
+    nama: 'Durian DUREN DEWA',
+    kategori: 'Kuliner',
+    deskripsi:
+      'Tempat penjualan durian di kawasan Desa Duyung, salah satu kawasan yang dikenal dengan kampung wisata durian di Trawas. Pengunjung dapat membeli durian lokal sesuai jenis dan ketersediaan dari penjual.',
+    harga: 100000,
+    jam: '08.00 - 17.00 WIB',
+    jamBuka: '08:00',
+    jamTutup: '17:00',
+    alamat: 'Kampung Durian, Desa Duyung, Kecamatan Trawas.',
+    gambar: 'assets/images/wisata/durian-duren-dewa.jpg',
+    latitude: -7.646218856426906,
+    longitude: 112.6112975117526,
   },
   {
-    "rating": null,
-    "hargaAngka": 10000,
-    "jamBuka": "08:00",
-    "jamTutup": "19:00",
-    "buka24Jam": false,
-    "id": 4,
-    "nama": "La Verde Cafe",
-    "kategori": "Kuliner",
-    "deskripsi": "Kafe di sekitar Titik Nol Trawas dengan pemandangan persawahan dan pegunungan. Tersedia makanan dan minuman untuk pengunjung yang ingin bersantai. Informasi harga dan jam dapat berubah.",
-    "harga": "Minuman mulai Rp10.000; makanan Rp15.000",
-    "jam": "08.00 - 19.00 WIB; cek jadwal terbaru",
-    "alamat": "Desa Duyung, Kecamatan Trawas, Kabupaten Mojokerto, Jawa Timur 61375.",
-    "gambar": "assets/images/wisata/la-verde-cafe.jpg",
-    "latitude": -7.647420433538123,
-    "longitude": 112.60773553835841,
-    "sumber": "https://jatim.idntimes.com/travel/destination/tempat-ngopi-pagi-dengan-pemandangan-alam-terbaik-di-mojokerto-c1c2-01-81bk8-c09jpy",
-    "catatan": "Jam dan harga berdasarkan artikel, bukan konfirmasi langsung. Filter harga menggunakan harga awal minuman."
+    id: 4,
+    nama: 'La Verde Cafe',
+    kategori: 'Kuliner',
+    deskripsi:
+      'Kafe dengan suasana santai di kawasan Desa Duyung. La Verde Cafe menawarkan pemandangan persawahan dan alam pegunungan, serta pilihan makanan dan minuman untuk menemani waktu bersantai.',
+    harga: 15000,
+    jam: '08.00 - 20.00 WIB setiap hari',
+    jamBuka: '08:00',
+    jamTutup: '20:00',
+    alamat: 'Desa Duyung, Kecamatan Trawas.',
+    gambar: 'assets/images/wisata/la-verde-cafe.jpg',
+    latitude: -7.647420433538123,
+    longitude: 112.60773553835841,
   },
   {
-    "rating": null,
-    "hargaAngka": null,
-    "jamBuka": null,
-    "jamTutup": null,
-    "buka24Jam": false,
-    "id": 5,
-    "nama": "Gunung Bale Resort",
-    "kategori": "Penginapan",
-    "deskripsi": "Tempat peristirahatan di kawasan Trawas yang juga digunakan untuk kegiatan kelompok dan outbound. Tarif menginap atau kegiatan perlu dikonfirmasi sesuai paket yang dipilih.",
-    "harga": "Hubungi pengelola untuk tarif",
-    "jam": "Sesuai reservasi; konfirmasi pengelola",
-    "alamat": "Kawasan Duyung / Tamiajeng, Kecamatan Trawas, Kabupaten Mojokerto, Jawa Timur. Ikuti titik lokasi pada peta.",
-    "gambar": "assets/images/wisata/gunung-bale-resort.jpg",
-    "latitude": -7.6446416237045725,
-    "longitude": 112.60588222532556,
-    "sumber": "https://www.outboundpacet.co.id/2019/05/gbr-trawas.html",
-    "catatan": "Nama kawasan berbeda antarsumber. Koordinat mengikuti kiriman pemilik aplikasi."
-  }
+    id: 5,
+    nama: 'Gunung Bale Resort',
+    kategori: 'Penginapan',
+    deskripsi:
+      'Resort di kawasan Trawas dengan suasana alam pegunungan. Tempat ini dapat menjadi pilihan untuk berlibur, menginap, maupun melakukan kegiatan bersama keluarga dan rombongan.',
+    harga: 250000,
+    jam: '08.00 - 17.00 WIB (layanan reservasi)',
+    jamBuka: '08:00',
+    jamTutup: '17:00',
+    alamat: 'Duyung, Tamiajeng, Kecamatan Trawas.',
+    gambar: 'assets/images/wisata/gunung-bale-resort.jpg',
+    latitude: -7.6446416237045725,
+    longitude: 112.60588222532556,
+  },
 ];
 
 @Component({
@@ -162,106 +132,36 @@ export const DATA_WISATA: DataWisata[] = [
 })
 export class WisataPage {
   searchTerm = '';
-
   selectedKategori = 'Semua';
   selectedHarga = 'semua';
   selectedJam = 'semua';
-
   panelTerbuka = false;
   jenisFilter = 'kategori';
 
-  kategoriList = ['Semua', 'Kuliner', 'Penginapan', 'Lainnya'];
+  kategoriList = ['Semua', 'Kuliner', 'Penginapan'];
 
   hargaList = [
-    {
-      id: 'semua',
-      label: 'Semua harga',
-      min: 0,
-      max: Infinity,
-    },
-    {
-      id: 'gratis',
-      label: 'Gratis',
-      min: 0,
-      max: 0,
-    },
-    {
-      id: 'dibawah10',
-      label: 'Di bawah Rp10.000',
-      min: 1,
-      max: 9999,
-    },
-    {
-      id: '10-20',
-      label: 'Rp10.000 - <Rp20.000',
-      min: 10000,
-      max: 19999,
-    },
-    {
-      id: '20-25',
-      label: 'Rp20.000 - <Rp25.000',
-      min: 20000,
-      max: 24999,
-    },
-    {
-      id: '25-30',
-      label: 'Rp25.000 - <Rp30.000',
-      min: 25000,
-      max: 29999,
-    },
-    {
-      id: '30-40',
-      label: 'Rp30.000 - <Rp40.000',
-      min: 30000,
-      max: 39999,
-    },
-    {
-      id: '40-50',
-      label: 'Rp40.000 - Rp50.000',
-      min: 40000,
-      max: 50000,
-    },
-    {
-      id: 'diatas50',
-      label: 'Di atas Rp50.000',
-      min: 50001,
-      max: Infinity,
-    },
+    { id: 'semua', label: 'Semua harga', min: 0, max: Infinity },
+    { id: 'dibawah10', label: 'Di bawah Rp10.000', min: 0, max: 9999 },
+    { id: '10-20', label: 'Rp10.000 - Rp19.999', min: 10000, max: 19999 },
+    { id: '20-50', label: 'Rp20.000 - Rp49.999', min: 20000, max: 49999 },
+    { id: '50-100', label: 'Rp50.000 - Rp99.999', min: 50000, max: 99999 },
+    { id: '100-250', label: 'Rp100.000 - Rp249.999', min: 100000, max: 249999 },
+    { id: '250-500', label: 'Rp250.000 - Rp500.000', min: 250000, max: 500000 },
+    { id: 'diatas500', label: 'Di atas Rp500.000', min: 500001, max: Infinity },
   ];
 
   jamList = [
-    {
-      id: 'semua',
-      label: 'Semua jam',
-      detail: 'Tanpa filter waktu',
-    },
-    {
-      id: 'pagi',
-      label: 'Pagi',
-      detail: '06.00 - 13.00 WIB',
-    },
-    {
-      id: 'siang',
-      label: 'Siang',
-      detail: '13.00 - 18.00 WIB',
-    },
-    {
-      id: 'malam',
-      label: 'Malam',
-      detail: '18.00 - 06.00 WIB',
-    },
-    {
-      id: '24jam',
-      label: 'Buka 24 jam',
-      detail: 'Buka sepanjang hari',
-    },
+    { id: 'semua', label: 'Semua jam', detail: 'Tanpa filter waktu' },
+    { id: 'pagi', label: 'Pagi', detail: '06.00 - 13.00 WIB' },
+    { id: 'siang', label: 'Siang', detail: '13.00 - 18.00 WIB' },
+    { id: 'malam', label: 'Malam', detail: '18.00 - 06.00 WIB' },
   ];
 
   destinasiList = DATA_WISATA;
 
   constructor() {
     addIcons({
-      star,
       pricetagOutline,
       timeOutline,
       locationOutline,
@@ -271,21 +171,19 @@ export class WisataPage {
     });
   }
 
-  get labelHarga() {
-    const pilihan = this.hargaList.find(
-      (item) => item.id === this.selectedHarga,
+  get labelHarga(): string {
+    return (
+      this.hargaList.find((item) => item.id === this.selectedHarga)?.label || ''
     );
-
-    return pilihan?.label || '';
   }
 
-  get labelJam() {
-    const pilihan = this.jamList.find((item) => item.id === this.selectedJam);
-
-    return pilihan?.label || '';
+  get labelJam(): string {
+    return (
+      this.jamList.find((item) => item.id === this.selectedJam)?.label || ''
+    );
   }
 
-  get adaFilter() {
+  get adaFilter(): boolean {
     return (
       this.selectedKategori !== 'Semua' ||
       this.selectedHarga !== 'semua' ||
@@ -293,85 +191,52 @@ export class WisataPage {
     );
   }
 
-  get destinasiFiltered() {
+  get destinasiFiltered(): DataWisata[] {
     const keyword = this.searchTerm.trim().toLowerCase();
-
     const harga =
       this.hargaList.find((item) => item.id === this.selectedHarga) ||
       this.hargaList[0];
 
     return this.destinasiList.filter((dest) => {
-      const cocokNama = dest.nama.toLowerCase().includes(keyword);
-
+      const cocokNama =
+        dest.nama.toLowerCase().includes(keyword) ||
+        dest.kategori.toLowerCase().includes(keyword);
       const cocokKategori =
         this.selectedKategori === 'Semua' ||
         dest.kategori === this.selectedKategori;
-
-      const cocokHarga =
-        this.selectedHarga === 'semua' ||
-        (dest.hargaAngka !== null &&
-          dest.hargaAngka >= harga.min && dest.hargaAngka <= harga.max);
-
-      const cocokJam = this.sesuaiJam(
-        dest.jamBuka,
-        dest.jamTutup,
-        dest.buka24Jam,
-      );
-
+      const cocokHarga = dest.harga >= harga.min && dest.harga <= harga.max;
+      const cocokJam = this.sesuaiJam(dest.jamBuka, dest.jamTutup);
       return cocokNama && cocokKategori && cocokHarga && cocokJam;
     });
   }
 
-  bukaFilter(jenis: string) {
+  formatHarga(harga: number): string {
+    return 'Rp' + harga.toLocaleString('id-ID');
+  }
+
+  bukaFilter(jenis: string): void {
     this.jenisFilter = jenis;
     this.panelTerbuka = true;
   }
 
-  pilihFilter(nilai: string) {
-    if (this.jenisFilter === 'kategori') {
-      this.selectedKategori = nilai;
-    }
-
-    if (this.jenisFilter === 'harga') {
-      this.selectedHarga = nilai;
-    }
-
-    if (this.jenisFilter === 'jam') {
-      this.selectedJam = nilai;
-    }
-
+  pilihFilter(nilai: string): void {
+    if (this.jenisFilter === 'kategori') this.selectedKategori = nilai;
+    if (this.jenisFilter === 'harga') this.selectedHarga = nilai;
+    if (this.jenisFilter === 'jam') this.selectedJam = nilai;
     this.panelTerbuka = false;
   }
 
-  ubahKeMenit(waktu: string) {
+  private keMenit(waktu: string): number {
     const [jam, menit] = waktu.split(':').map(Number);
     return jam * 60 + menit;
   }
 
-  sesuaiJam(jamBuka: string | null, jamTutup: string | null, buka24Jam: boolean) {
-    if (this.selectedJam === 'semua') {
-      return true;
-    }
+  private sesuaiJam(jamBuka: string, jamTutup: string): boolean {
+    if (this.selectedJam === 'semua') return true;
 
-    if (this.selectedJam === '24jam') {
-      return buka24Jam;
-    }
-
-    if (buka24Jam) {
-      return true;
-    }
-
-    if (!jamBuka || !jamTutup) return false;
-
-    const buka = this.ubahKeMenit(jamBuka);
-    const tutup = this.ubahKeMenit(jamTutup);
-
-    if (buka === tutup) {
-      return false;
-    }
-
-    // Jadwal lewat tengah malam dibagi menjadi dua rentang.
-    const jadwal =
+    const buka = this.keMenit(jamBuka);
+    const tutup = this.keMenit(jamTutup);
+    const rentang =
       buka < tutup
         ? [[buka, tutup]]
         : [
@@ -379,39 +244,25 @@ export class WisataPage {
             [0, tutup],
           ];
 
-    // Pagi: 06.00–13.00.
-    let periode = [[360, 780]];
-
-    if (this.selectedJam === 'siang') {
-      periode = [[780, 1080]];
-    }
-
-    if (this.selectedJam === 'malam') {
+    let periode: number[][];
+    if (this.selectedJam === 'pagi') periode = [[360, 780]];
+    else if (this.selectedJam === 'siang') periode = [[780, 1080]];
+    else
       periode = [
         [1080, 1440],
         [0, 360],
       ];
-    }
 
-    // Cek apakah jam operasional beririsan dengan periode pilihan.
-    for (const jam of jadwal) {
-      for (const waktu of periode) {
-        if (jam[0] < waktu[1] && jam[1] > waktu[0]) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return rentang.some((r) => periode.some((p) => r[0] < p[1] && r[1] > p[0]));
   }
 
-  resetFilter() {
+  resetFilter(): void {
     this.selectedKategori = 'Semua';
     this.selectedHarga = 'semua';
     this.selectedJam = 'semua';
   }
 
-  resetSemua() {
+  resetSemua(): void {
     this.searchTerm = '';
     this.resetFilter();
   }

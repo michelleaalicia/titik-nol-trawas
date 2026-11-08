@@ -1,15 +1,38 @@
 import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonContent, IonButton, IonIcon } from '@ionic/angular';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonContent,
+  IonIcon,
+  IonButton,
+} from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { arrowBack, star, pricetagOutline, timeOutline, locationOutline, mapOutline } from 'ionicons/icons';
+import {
+  arrowBack,
+  pricetagOutline,
+  timeOutline,
+  locationOutline,
+  mapOutline,
+} from 'ionicons/icons';
 import { DATA_WISATA, DataWisata } from '../wisata/wisata.page';
 
 @Component({
   selector: 'app-detail-wisata',
   standalone: true,
-  imports: [CommonModule, IonContent, IonButton, IonIcon],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonContent,
+    IonIcon,
+    IonButton,
+  ],
   templateUrl: './detail-wisata.page.html',
   styleUrls: ['./detail-wisata.page.scss'],
 })
@@ -21,12 +44,23 @@ export class DetailWisataPage {
     private location: Location,
     private router: Router,
   ) {
-    addIcons({ arrowBack, star, pricetagOutline, timeOutline, locationOutline, mapOutline });
+    addIcons({
+      'arrow-back': arrowBack,
+      'pricetag-outline': pricetagOutline,
+      'time-outline': timeOutline,
+      'location-outline': locationOutline,
+      'map-outline': mapOutline,
+    });
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.wisata = DATA_WISATA.find(item => item.id === id);
+    this.wisata = DATA_WISATA.find((item) => item.id === id);
   }
 
-  goBack() {
+  formatHarga(harga: number): string {
+    return 'Rp' + harga.toLocaleString('id-ID');
+  }
+
+  goBack(): void {
     if (window.history.length > 1) {
       this.location.back();
     } else {
@@ -34,10 +68,14 @@ export class DetailWisataPage {
     }
   }
 
-  bukaMaps() {
+  bukaMaps(): void {
     if (!this.wisata) return;
-    const koordinat = this.wisata.latitude + ',' + this.wisata.longitude;
-    const url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(koordinat);
+
+    const koordinat = `${this.wisata.latitude},${this.wisata.longitude}`;
+    const url =
+      'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(koordinat);
+
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 }

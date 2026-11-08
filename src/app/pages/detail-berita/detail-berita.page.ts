@@ -3,15 +3,7 @@ import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DATA_BERITA } from '../data/konten.data';
 
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonButton,
-  IonContent,
-  IonIcon,
-} from '@ionic/angular';
+import { IonHeader, IonButton, IonContent, IonIcon } from '@ionic/angular';
 
 import { addIcons } from 'ionicons';
 import { arrowBack, calendarOutline, checkmarkCircle } from 'ionicons/icons';
@@ -22,7 +14,6 @@ import { arrowBack, calendarOutline, checkmarkCircle } from 'ionicons/icons';
   imports: [
     CommonModule,
     IonHeader,
-    IonToolbar,
     IonContent,
     IonIcon,
     IonButton,
@@ -32,8 +23,6 @@ import { arrowBack, calendarOutline, checkmarkCircle } from 'ionicons/icons';
 })
 export class DetailBeritaPage {
   berita: any;
-
-  beritaList = DATA_BERITA;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,7 +36,7 @@ export class DetailBeritaPage {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.berita = this.beritaList.find((item) => item.id === id);
+    this.berita = DATA_BERITA.find((item) => item.id === id);
   }
 
   goBack() {

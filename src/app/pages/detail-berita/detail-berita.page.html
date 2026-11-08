@@ -17,15 +17,14 @@
 
 <ion-content class="detail-berita-content">
   <div class="main-wrap" *ngIf="berita; else kosong">
-    <!-- Cover Image -->
+    
     <div class="cover-wrap">
       <img [src]="berita.cover" [alt]="berita.judul" class="cover-image" />
       <div class="cover-gradient"></div>
     </div>
 
-    <!-- Article Header + Body -->
     <div class="article-card">
-      <!-- Meta -->
+      
       <div class="meta-row">
         <div class="tanggal">
           <ion-icon name="calendar-outline"></ion-icon>
@@ -33,10 +32,8 @@
         </div>
       </div>
 
-      <!-- Judul -->
       <h1>{{ berita.judul }}</h1>
 
-      <!-- Author -->
       <div class="author-row">
         <div class="avatar">{{ berita.penulisInisial }}</div>
         <div class="author-info">
@@ -45,7 +42,6 @@
         </div>
       </div>
 
-      <!-- Body Content -->
       <div class="article-body">
         <p>{{ berita.paragraf1 }}</p>
 
@@ -66,14 +62,6 @@
         </ul>
 
         <p>{{ berita.penutup }}</p>
-        <p>{{ berita.catatanSumber }}</p>
-        <a
-          *ngIf="berita.sumber"
-          [href]="berita.sumber"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Baca sumber informasi</a
-        >
       </div>
     </div>
   </div>

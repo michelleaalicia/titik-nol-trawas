@@ -28,8 +28,6 @@
   line-height: 1.5;
 }
 
-/* Pencarian */
-
 .custom-search {
   --background: var(--tn-surface);
   --border-radius: 14px;
@@ -41,8 +39,6 @@
   padding: 0;
   min-height: 48px;
 }
-
-/* Tombol filter */
 
 .filter-row {
   display: grid;
@@ -83,8 +79,6 @@
   color: var(--tn-green);
 }
 
-/* Ringkasan filter aktif */
-
 .active-filters {
   display: flex;
   flex-wrap: wrap;
@@ -114,8 +108,6 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-/* Daftar event */
 
 .result-header {
   margin: 24px 0 14px;
@@ -256,8 +248,6 @@
   font-weight: 600;
 }
 
-/* Hasil kosong */
-
 .empty-state {
   padding: 40px 16px;
   text-align: center;
@@ -277,8 +267,6 @@
   color: var(--tn-text-secondary);
   font-size: var(--tn-font-small);
 }
-
-/* Panel filter */
 
 .filter-modal {
   --height: auto;
@@ -317,8 +305,7 @@
   font-weight: 700;
 }
 
-.sheet-header p,
-.sheet-note {
+.sheet-header p {
   margin: 6px 0 0;
   color: var(--tn-text-secondary);
   font-size: var(--tn-font-small);
@@ -381,10 +368,6 @@
   flex-shrink: 0;
   color: var(--tn-green);
   font-size: 21px;
-}
-
-.sheet-note {
-  margin-top: 16px;
 }
 
 button:focus-visible {
